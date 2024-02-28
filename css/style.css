@@ -119,6 +119,7 @@ h3 {
 #Lists a {
     text-align: center;
     margin: auto;
+    text-decoration: none;
 }
 
 #Lists button {
@@ -196,4 +197,107 @@ h3 {
     letter-spacing: 0.5px;
 }
 
-
+/* Favorieten */
+#containerPrint{
+    text-align: right;
+    margin-right: 2rem;
+}
+#favorieten i{
+    color: goldenrod;
+    transition: 1s;
+    cursor: pointer;
+    font-size: 4rem;
+}
+#favorieten i:hover{
+    color: rgb(227, 140, 17);
+}
+#FavoriteList{
+    font-family: Ringbearer;
+    color: goldenrod;
+    font-size: 1.5rem;
+    
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+    align-items: top; 
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+#favorieten a{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid goldenrod 1.5px;
+}
+#FavoriteListActive{
+    font-family: Ringbearer;
+    color: goldenrod;
+    font-size: 1rem;
+    
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+    align-items: top; 
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+#FavoriteListVerwijder{
+    transition: 0.5s;
+    cursor: pointer;
+}
+#FavoriteListVerwijder:hover{
+    transition: 0.5s;
+    color: rgb(227, 140, 17);
+}
+/* Blacklist */
+#containerPrint{
+    text-align: right;
+    margin-right: 2rem;
+}
+#Blacklist i{
+    color: goldenrod;
+    transition: 1s;
+    cursor: pointer;
+    font-size: 4rem;
+}
+#Blacklist i:hover{
+    color: rgb(227, 140, 17);
+}
+#BlacklistList{
+    font-family: Ringbearer;
+    color: goldenrod;
+    font-size: 1.5rem;
+    
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+    align-items: top; 
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+#Blacklist a{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid goldenrod 1.5px;
+}
+#BlacklistListActive{
+    font-family: Ringbearer;
+    color: goldenrod;
+    font-size: 1rem;
+    
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+    align-items: top; 
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+#BlacklistListVerwijder{
+    transition: 0.5s;
+    cursor: pointer;
+}
+#BlacklistListVerwijder:hover{
+    transition: 0.5s;
+    color: rgb(227, 140, 17);
+}
