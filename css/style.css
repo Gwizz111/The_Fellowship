@@ -1,0 +1,17 @@
+@font-face {
+    font-family: Ringbearer;
+    src: url(../assets/fonts/ringbearer/Ringbearer.TTF);
+}
+
+h1{
+    font-family: Ringbearer;
+    color: goldenrod;
+    text-align: center;
+    font-size: 2rem;
+}
+h2{
+    font-family: Ringbearer;
+    color: goldenrod;
+    text-align: center;
+    font-size: 1.5rem;
+}
