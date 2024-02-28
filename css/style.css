@@ -55,6 +55,8 @@ h3{
     border-color: goldenrod;
 }
 #Lists{
+    margin-right: 35%;
+    margin-left: 35%;
     display: grid;
     align-items: top; 
     grid-template-columns: 1fr 1fr;
