@@ -118,6 +118,7 @@ h3 {
 #Lists a {
     text-align: center;
     margin: auto;
+    text-decoration: none;
 }
 
 #Lists button {
