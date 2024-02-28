@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The LOTR quiz - Favorieten</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <header>
     </header>
-    <main>
+    <main id="favorieten">
         <h1>Favorieten</h1>
-        <i class="fa fa-print" style="color: goldenrod; font-size: 5rem;"></i>
-        <section id="FavoriteList" style="color: goldenrod;">
+        <div id="containerPrint"><i class="fa fa-print"></i></div>
+        <section id="FavoriteList">
             <a>Quote</a>
             <a>karakter</a>
-            <a>X</a>
+            <a>Verwijder</a>
+        </section>
+        <section id="FavoriteListActive">
+            <a>Gandalf</a>
+            <a>"You shall not pass!"</a>
+            <a id="FavoriteListVerwijder">X</a>
         </section>
     </main>
     <footer>
