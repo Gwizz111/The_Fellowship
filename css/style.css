@@ -11,6 +11,7 @@ footer {
 }
 
 body {
+    text-decoration: none;
     overflow-x: hidden;
     display: grid;
     grid-template-areas:
