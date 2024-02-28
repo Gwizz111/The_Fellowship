@@ -17,6 +17,7 @@ body {
     src: url(../assets/fonts/ringbearer/Ringbearer.TTF);
 }
 body {
+    padding-top: 2rem;
     background-image: url(../assets/images/Background.jpg);
     background-color: #cccccc;
 }
@@ -33,6 +34,7 @@ h2{
     color: goldenrod;
     text-align: center;
     font-size: 1.4rem;
+    margin-bottom: 2rem;
 }
 h3{
     font-family: Ringbearer;
@@ -53,6 +55,12 @@ h3{
     margin-top: 2rem;
     margin-bottom: 1rem;
     border-color: goldenrod;
+    transition: ease-in-out 1s;
+}
+#Gamemode img:hover{
+    transition: ease-in-out 0.5s;
+    opacity: 70%;
+    scale: 1.03;
 }
 #Lists{
     margin-right: 35%;
@@ -65,6 +73,7 @@ h3{
 #Lists a{
     text-align: center;
     margin: auto;
+    text-decoration: none;
 }
 #Lists button{
     text-align: center;
