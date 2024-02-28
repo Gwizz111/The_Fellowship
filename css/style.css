@@ -33,8 +33,16 @@ header {
     padding: 0;
     margin: 1rem
 }
-
+header a{
+    text-decoration: none;
+}
+header h1:hover{
+    transition: 1s;
+    color: #cccccc;
+}
 header h1 {
+    transition: 1s;
+    text-decoration: none;
     color: #222222;
     padding: 10px;
 }
@@ -107,6 +115,12 @@ h3 {
     margin-top: 2rem;
     margin-bottom: 1rem;
     border-color: goldenrod;
+    transition: ease-in-out 0.5s;
+}
+#Gamemode img:hover {
+    transition: ease-in-out 0.5s;
+    opacity: 75%;
+    scale: 1.03;
 }
 
 #Lists {
