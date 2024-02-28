@@ -61,6 +61,7 @@ header nav ul li a {
     text-align: right;
     padding: 10px;
     text-decoration: none;
+    transition: 500ms;
 }
 
 header nav ul li a:hover {
