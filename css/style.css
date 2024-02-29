@@ -36,6 +36,7 @@ header {
 }
 header a{
     text-decoration: none;
+    font-family: Ringbearer;
 }
 header h1:hover{
     transition: 1s;
