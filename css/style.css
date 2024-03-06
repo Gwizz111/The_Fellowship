@@ -80,26 +80,30 @@ header nav ul li a:hover {
 /* FOOTER */
 
 footer{
+    text-align: center;
     margin-top: 2rem;
-    background-color: goldenrod;
+    border-top: goldenrod solid 3px;
+    background: rgba(33, 33, 33, .7); 
     padding: 1.5rem;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem; 
+    height: 2rem; 
 }
 footer a{
     margin: auto;
-    color: #222222;
-    text-decoration: none
+    color: goldenrod;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 footer h1{
-    color: #222222;
+    color: goldenrod;
     transition: 1s;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 footer h1:hover{
-    color: white;
+    color: rgb(218, 128, 32);
     transition: 1s;
 }
 
@@ -283,6 +287,19 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
+#FavoriteListActive i{
+    text-align: right;
+    padding-right: 2rem;
+    color: goldenrod;
+    transition: 1s;
+    cursor: pointer;
+    font-size: 1.8rem;
+    border-bottom: solid goldenrod 1.5px;
+}
+#FavoriteListActive i:hover{
+    transition: 0.5s;
+    color: rgb(227, 140, 17);
+}
 #FavoriteListVerwijder{
     transition: 0.5s;
     cursor: pointer;
@@ -296,13 +313,27 @@ h3 {
     text-align: right;
     margin-right: 2rem;
 }
-#Blacklist i{
+#containerPrint i{
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
-    font-size: 4rem;
+    font-size: 2rem;
+    margin-right: 10%;
 }
-#Blacklist i:hover{
+#containerPrint i:hover{
+    color: rgb(227, 140, 17);
+}
+#BlacklistListActive i{
+    text-align: right;
+    padding-right: 2rem;
+    color: goldenrod;
+    transition: 1s;
+    cursor: pointer;
+    font-size: 1.8rem;
+    border-bottom: solid goldenrod 1.5px;
+}
+#BlacklistListActive i:hover{
+    transition: 0.5s;
     color: rgb(227, 140, 17);
 }
 #BlacklistList{
