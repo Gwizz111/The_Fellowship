@@ -344,3 +344,65 @@ h3 {
     opacity: 75%;
     scale: 1.03;
 }
+
+/* LOGIN */
+#inlogPage{
+    display: flex;
+    font-family: Ringbearer;
+    color: goldenrod;
+    font-size: 1.2rem;
+}
+#inlogPageForm{
+    margin: auto;
+    margin-top: 2rem;
+    text-align: center;
+    padding: 5rem;
+    border: goldenrod 3px solid;
+    border-radius: 15px;
+}
+#btnForm {
+    text-align: center;
+    font-family: Ringbearer;
+    font-size: 14px;
+    color: goldenrod;
+    background-color: #ffffff00;
+    padding: 10px 30px;
+    border: solid goldenrod 2px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1460ms;
+    align-items: center;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+#btnForm:hover {
+
+    transition: 1460ms;
+    background-color: #504f4fc8;
+    color: goldenrod;
+    border: solid 2px goldenrod;
+}
+#inlogPageForm input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 2px solid goldenrod;
+    background-color: none;
+    color: grey;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+#inlogPageForm input[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    display: inline-block;
+    border: 2px solid goldenrod;
+    background-color: none;
+    color: grey;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
