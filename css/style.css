@@ -110,6 +110,7 @@ h3 {
 }
 
 #Gamemode img {
+    
     display: block;
     margin: auto;
     width: 20rem;
@@ -316,3 +317,4 @@ h3 {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
+
