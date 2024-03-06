@@ -318,3 +318,29 @@ h3 {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
+
+/* INDEX */
+
+#indexProjects {
+    display: grid;
+    align-items: top;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0px;
+}
+#indexProjectsTitle{
+    margin-top: 2rem;
+}
+#indexProjects img{
+    display: block;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    max-width: 50%;
+    border-color: goldenrod;
+    transition: ease-in-out 0.5s;
+}
+#indexProjects img:hover {
+    transition: ease-in-out 0.5s;
+    opacity: 75%;
+    scale: 1.03;
+}
