@@ -159,12 +159,47 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
-#Gamemode img:hover {
-    transition: ease-in-out 0.5s;
-    opacity: 75%;
-    scale: 1.03;
-}
-
+.overlay {
+    position: absolute;
+    display: block;
+    margin: auto;
+    top: 0;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    width: 18rem;
+    height: 18rem;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(33, 33, 33, .7);
+  }
+  #containerGamemode {
+    position: relative;
+  }
+  #containerGamemode:hover {
+    position: relative;
+    cursor: pointer;
+  }
+  #containerGamemode:hover .overlay {
+    opacity: 1;
+  }
+  
+  .text {
+    font-family: Ringbearer;
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .text a{
+    color: white;
+    text-decoration: none;
+  }
 #Lists {
     display: grid;
     align-items: top;
