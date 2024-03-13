@@ -12,11 +12,9 @@
 
 <body>
     <header>
-        <a href="/html/homepage.html">
-            <h1>The Fellowship</h1>
-        </a>
+        <a href="/html/homepage.html"><h1>The Fellowship</h1></a>
         <nav>
-            <ul>
+            <ul class="hide-mobile">
                 <li><a href="/html/homepage.html">Home</a></li>
                 <div class="dropdown">
                     <button class="dropbtn">Quizzen 
@@ -38,6 +36,21 @@
                   </div> 
                 <li><a href="/html/login.html">Uitloggen</a></li>
             </ul>
+            <div class="hamburger-menu">
+                <input id="menu__toggle" type="checkbox" />
+                <label class="menu__btn" for="menu__toggle">
+                  <span></span>
+                </label>
+            
+                <ul class="menu__box">
+                    <li><a href="/html/homepage.html">Home</a></li>
+                    <li><a href="rounds.html">10 Rondes</a></li>
+                    <li><a href="suddendeath.html">Sudden death</a></li>
+                    <li><a href="/html/favourites.html" id="navActive">Favorieten</a></li>
+                    <li><a href="/html/blacklist.html">Blacklisted</a></li>
+                    <li><a href="/html/login.html">Uitloggen</a></li>
+                </ul>
+              </div>
         </nav>
     </header>
     <main id="favorieten">
