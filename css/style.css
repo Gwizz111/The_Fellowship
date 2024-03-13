@@ -724,7 +724,7 @@ select {
     right: 0 !important;
   }
   .menu__btn {
-    position: fixed;
+    position: absolute;
     top: 40px;
     right: 40px;
     width: 40px;
@@ -808,19 +808,22 @@ select {
         max-width: 50%;
         text-align: center;
         letter-spacing: 1px;
-        margin-left: 11px;
+        margin: 0 auto;
     }
 
     h2 {
         max-width: 40%;
         text-align: center;
-        margin-left: 55px;
+        margin: 0 auto;
     }
 
     #Gamemode {
-        max-width: 51%;
-        display: block;
+        display: grid;
+        align-items: top;
+        grid-template-columns: 1fr;
+        column-gap: 0px;
     }
+    
 
     #Lists {
         max-width: 51%;
@@ -840,5 +843,15 @@ select {
         max-width: 50%;
         display: inline;
         margin-left: 50px;
+    }
+    #Lists {
+        max-width: 100vw;
+        display: grid;
+        align-items: top;
+        grid-template-columns: 1fr;
+    }
+    #Lists p {
+        margin-left: 12%;
+        margin-top: 1rem;
     }
 }
