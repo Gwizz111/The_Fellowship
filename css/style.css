@@ -7,6 +7,7 @@ body {
         'main main main'
         'footer footer footer';
 }
+
 nav {
     grid-area: nav;
 }
@@ -19,10 +20,22 @@ footer {
     grid-area: footer;
 }
 
+body {
+    text-decoration: none;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'main main main'
+        'footer footer footer';
+
+}
+
 @font-face {
     font-family: Ringbearer;
     src: url(../assets/fonts/ringbearer/Ringbearer.TTF);
 }
+
 body {
     background-image: url(../assets/images/Background.jpg);
     background-color: #cccccc;
@@ -37,14 +50,17 @@ header {
     padding: 0rem;
     margin: 1rem
 }
-header a{
+
+header a {
     text-decoration: none;
     font-family: Ringbearer;
 }
-header h1:hover{
+
+header h1:hover {
     transition: 1s;
     color: #cccccc;
 }
+
 header h1 {
     transition: 1s;
     text-decoration: none;
@@ -75,13 +91,15 @@ header nav ul li a:hover {
     color: goldenrod;
     transition: 500ms;
 }
-#navActive{
+
+#navActive {
     background-color: #222222;
     border-radius: 0.2vw;
     color: goldenrod;
     transition: 500ms;
 }
-#navActive:hover{
+
+#navActive:hover {
     background-color: #3e3e3e;
     transition: 500ms;
 }
@@ -178,31 +196,34 @@ header nav ul li a:hover {
   }
 /* FOOTER */
 
-footer{
+footer {
     text-align: center;
     margin-top: 2rem;
     border-top: goldenrod solid 3px;
-    background: rgba(33, 33, 33, .7); 
+    background: rgba(33, 33, 33, .7);
     padding: 0.75rem;
     position:absolute;
     bottom: 0px;
     bottom: 0;
     width: 100%;
-    height: 2rem; 
+    height: 2rem;
 }
-footer a{
+
+footer a {
     margin: auto;
     color: goldenrod;
     text-decoration: none;
     font-size: 0.9rem;
     font-family: Arial, Helvetica, sans-serif;
 }
-footer h1{
+
+footer h1 {
     color: goldenrod;
     transition: 1s;
     font-size: 1.2rem;
 }
-footer h1:hover{
+
+footer h1:hover {
     color: rgb(218, 128, 32);
     transition: 1s;
 }
@@ -239,11 +260,13 @@ h3 {
     grid-template-columns: 1fr 1fr;
     column-gap: 0px;
 }
-#containerGamemodeImg{
+
+#containerGamemodeImg {
     margin: auto;
     text-align: center;
     width: 20rem;
 }
+
 #Gamemode img {
     display: block;
     margin: auto;
@@ -309,11 +332,22 @@ h3 {
 }
 
 
-#Highscore a{
+#Highscore a {
     font-family: Ringbearer;
     margin: auto;
     text-align: center;
     color: goldenrod;
+}
+
+#Highscore {
+    margin: auto;
+    text-align: center;
+    padding: 0.5rem;
+    border: solid goldenrod 2px;
+    border-radius: 50px;
+    margin-left: 42%;
+    margin-right: 42%;
+    margin-bottom: 1rem;
 }
 
 
@@ -363,19 +397,22 @@ h3 {
 .element--inset {
     border-style: inset;
 }
+
 /* 10 rondes */
-#answers{
+#answers {
     align-items: center;
-    margin: 10rem ;
+    margin: 10rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#answers a{
+
+#answers a {
     text-decoration: none;
 }
-#answers button{
+
+#answers button {
     display: block;
     margin: auto;
     text-align: center;
@@ -388,7 +425,7 @@ h3 {
     border: solid goldenrod 2px;
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
     border-radius: 50px;
-    transition : 1460ms;
+    transition: 1460ms;
     transform: translateY(0);
     flex-direction: row;
     align-items: center;
@@ -398,50 +435,56 @@ h3 {
 
 
 /* Favorieten */
-#containerPrint{
+#containerPrint {
     text-align: right;
     margin-right: 2rem;
 }
-#favorieten i{
+
+#favorieten i {
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
     font-size: 4rem;
 }
-#favorieten i:hover{
+
+#favorieten i:hover {
     color: rgb(227, 140, 17);
 }
-#FavoriteList{
+
+#FavoriteList {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1.5rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#favorieten a{
+
+#favorieten a {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#FavoriteListActive{
+
+#FavoriteListActive {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#FavoriteListActive i{
+
+#FavoriteListActive i {
     text-align: right;
     padding-right: 2rem;
     color: goldenrod;
@@ -450,34 +493,41 @@ h3 {
     font-size: 1.8rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#FavoriteListActive i:hover{
+
+#FavoriteListActive i:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
-#FavoriteListVerwijder{
+
+#FavoriteListVerwijder {
     transition: 0.5s;
     cursor: pointer;
 }
-#FavoriteListVerwijder:hover{
+
+#FavoriteListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
+
 /* Blacklist */
-#containerPrint{
+#containerPrint {
     text-align: right;
     margin-right: 2rem;
 }
-#containerPrint i{
+
+#containerPrint i {
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
     font-size: 2rem;
     margin-right: 10%;
 }
-#containerPrint i:hover{
+
+#containerPrint i:hover {
     color: rgb(227, 140, 17);
 }
-#BlacklistListActive i{
+
+#BlacklistListActive i {
     text-align: right;
     padding-right: 2rem;
     color: goldenrod;
@@ -486,45 +536,51 @@ h3 {
     font-size: 1.8rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#BlacklistListActive i:hover{
+
+#BlacklistListActive i:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
-#BlacklistList{
+
+#BlacklistList {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1.5rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#Blacklist a{
+
+#Blacklist a {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#BlacklistListActive{
+
+#BlacklistListActive {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#BlacklistListVerwijder{
+
+#BlacklistListVerwijder {
     transition: 0.5s;
     cursor: pointer;
 }
-#BlacklistListVerwijder:hover{
+
+#BlacklistListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
@@ -538,14 +594,17 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-.indexArticle{
+
+.indexArticle {
     max-width: 15rem;
     margin: auto;
 }
-#indexProjectsTitle{
+
+#indexProjectsTitle {
     margin-top: 2rem;
 }
-#indexProjects img{
+
+#indexProjects img {
     display: block;
     margin: auto;
     margin-top: 1.5rem;
@@ -554,6 +613,7 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
+
 #indexProjects img:hover {
     transition: ease-in-out 0.5s;
     opacity: 75%;
@@ -561,13 +621,14 @@ h3 {
 }
 
 /* LOGIN */
-#inlogPage{
+#inlogPage {
     display: flex;
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1.2rem;
 }
-#inlogPageForm{
+
+#inlogPageForm {
     margin: auto;
     margin-top: 2rem;
     text-align: center;
@@ -575,6 +636,7 @@ h3 {
     border: goldenrod 3px solid;
     border-radius: 15px;
 }
+
 #btnForm {
     text-align: center;
     font-family: Ringbearer;
@@ -590,6 +652,7 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+
 #btnForm:hover {
 
     transition: 1460ms;
@@ -597,7 +660,9 @@ h3 {
     color: goldenrod;
     border: solid 2px goldenrod;
 }
-#inlogPageForm input[type=text], select {
+
+#inlogPageForm input[type=text],
+select {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -609,7 +674,9 @@ h3 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-#inlogPageForm input[type=password], select {
+
+#inlogPageForm input[type=password],
+select {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -620,4 +687,53 @@ h3 {
     box-sizing: border-box;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #indexProjectsTitle {
+        max-width: 100%;
+    }
+
+    #indexProjects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #indexProjects article {
+        flex-basis: 33%;
+        padding: 5%;
+    }
+
+    #indexProjects img {
+        max-width: 60%;
+        border-width: 7px;
+    }
+
+    h1 {
+        max-width: 50%;
+        text-align: center;
+        letter-spacing: 1px;
+        margin-left: 11px;
+    }
+
+    h2 {
+        max-width: 40%;
+        text-align: center;
+        margin-left: 55px;
+    }
+
+    #Gamemode {
+        max-width: 51%;
+        display: block;
+    }
+
+    #Lists {
+        max-width: 51%;
+    }
+
+    #favorieten section {
+        margin-left: 2rem;
+        max-width: max-content;
+    }
 }
