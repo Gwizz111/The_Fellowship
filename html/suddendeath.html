@@ -8,15 +8,30 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    
     <header>
         <a href="/html/homepage.html"><h1>The Fellowship</h1></a>
         <nav>
             <ul>
                 <li><a href="/html/homepage.html">Home</a></li>
-                <li><a href="/html/favourites.html">Favorieten</a></li>
-                <li><a href="/html/blacklist.html">Blacklisted</a></li>
-                <li><a href="#">Uitloggen</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">Quizzen 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="rounds.html">10 Rondes</a>
+                        <a href="suddendeath.html" id="navActive">Sudden death</a>
+                    </div>
+                  </div> 
+                  <div class="dropdown">
+                    <button class="dropbtn">Quotes 
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/html/favourites.html">Favorieten</a>
+                        <a href="/html/blacklist.html">Blacklisted</a>
+                    </div>
+                  </div> 
+                <li><a href="/html/login.html">Uitloggen</a></li>
             </ul>
         </nav>
     </header>
