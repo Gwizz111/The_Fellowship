@@ -1,4 +1,5 @@
 body {
+    overflow-x: hidden;
     text-decoration: none;
     overflow-x: hidden;
     display: grid;
@@ -724,7 +725,7 @@ select {
     right: 0 !important;
   }
   .menu__btn {
-    position: fixed;
+    position: absolute;
     top: 40px;
     right: 40px;
     width: 40px;
@@ -808,7 +809,7 @@ select {
         max-width: 50%;
         text-align: center;
         letter-spacing: 1px;
-        margin-left: 11px;
+        margin: 0 auto;
         
     }
     #qoute{
@@ -831,9 +832,12 @@ select {
     }
 
     #Gamemode {
-        max-width: 51%;
-        display: block;
+        display: grid;
+        align-items: top;
+        grid-template-columns: 1fr;
+        column-gap: 0px;
     }
+    
 
     #Lists {
         max-width: 51%;
@@ -856,4 +860,14 @@ select {
     }
     
     
+    #Lists {
+        max-width: 100vw;
+        display: grid;
+        align-items: top;
+        grid-template-columns: 1fr;
+    }
+    #Lists p {
+        margin-left: 12%;
+        margin-top: 1rem;
+    }
 }
