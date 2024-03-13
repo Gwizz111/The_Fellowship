@@ -1,3 +1,12 @@
+body {
+    text-decoration: none;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-areas:
+        'header header header'
+        'main main main'
+        'footer footer footer';
+}
 nav {
     grid-area: nav;
 }
@@ -81,33 +90,44 @@ header nav ul li a:hover {
     color: goldenrod;
     transition: 500ms;
 }
+#navActive{
+    background-color: #222222;
+    border-radius: 0.2vw;
+    color: goldenrod;
+    transition: 500ms;
+}
+#navActive:hover{
+    background-color: #3e3e3e;
+    transition: 500ms;
+}
 
 /* FOOTER */
 
-footer {
+footer{
+    text-align: center;
     margin-top: 2rem;
-    background-color: goldenrod;
+    border-top: goldenrod solid 3px;
+    background: rgba(33, 33, 33, .7); 
     padding: 1.5rem;
-    position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem;
+    height: 2rem; 
 }
 
 footer a {
     margin: auto;
-    color: #222222;
-    text-decoration: none
+    color: goldenrod;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
-footer h1 {
-    color: #222222;
+footer h1{
+    color: goldenrod;
     transition: 1s;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
-
-footer h1:hover {
-    color: white;
+footer h1:hover{
+    color: rgb(218, 128, 32);
     transition: 1s;
 }
 
@@ -143,7 +163,11 @@ h3 {
     grid-template-columns: 1fr 1fr;
     column-gap: 0px;
 }
-
+#containerGamemodeImg{
+    margin: auto;
+    text-align: center;
+    width: 20rem;
+}
 #Gamemode img {
     display: block;
     margin: auto;
@@ -153,17 +177,67 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
+.overlay {
+    position: absolute;
+    display: block;
+    margin: auto;
+    top: 0;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    width: 18rem;
+    height: 18rem;
+    opacity: 0;
+    transition: .5s ease;
+    background: rgba(33, 33, 33, .7);
+  }
+  #containerGamemode {
+    position: relative;
+    max-width: 20rem;
+    margin: auto;
+  }
+  #containerGamemode:hover .overlay {
+    opacity: 1;
+  }
+  
+  .text {
+    font-family: Ringbearer;
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .text a{
+    color: white;
+    text-decoration: none;
+  }
 
-#Gamemode img:hover {
-    transition: ease-in-out 0.5s;
-    opacity: 75%;
-    scale: 1.03;
+#Highscore a{
+    font-family: Ringbearer;
+    margin: auto;
+    text-align: center;
+    color: goldenrod;
+}
+#Highscore{
+    margin: auto;
+    text-align: center;
+    padding: 0.5rem;
+    border: solid goldenrod 2px;
+    border-radius: 50px;
+    margin-left: 42%;
+    margin-right: 42%;
+    margin-bottom: 1rem;
 }
 
 #Lists {
     display: grid;
     align-items: top;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     column-gap: 0px;
 }
 
@@ -230,8 +304,9 @@ h3 {
 #answers a {
     text-decoration: none;
 }
-
-#answers button {
+#answers button{
+    display: block;
+    margin: auto;
     text-align: center;
     font-family: Ringbearer;
     font-weight: 0;
@@ -244,12 +319,12 @@ h3 {
     border-radius: 50px;
     transition: 1460ms;
     transform: translateY(0);
-    display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+
 
 /* Favorieten */
 #containerPrint {
@@ -300,8 +375,20 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-
-#FavoriteListVerwijder {
+#FavoriteListActive i{
+    text-align: right;
+    padding-right: 2rem;
+    color: goldenrod;
+    transition: 1s;
+    cursor: pointer;
+    font-size: 1.8rem;
+    border-bottom: solid goldenrod 1.5px;
+}
+#FavoriteListActive i:hover{
+    transition: 0.5s;
+    color: rgb(227, 140, 17);
+}
+#FavoriteListVerwijder{
     transition: 0.5s;
     cursor: pointer;
 }
@@ -316,15 +403,27 @@ h3 {
     text-align: right;
     margin-right: 2rem;
 }
-
-#Blacklist i {
+#containerPrint i{
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
-    font-size: 4rem;
+    font-size: 2rem;
+    margin-right: 10%;
 }
-
-#Blacklist i:hover {
+#containerPrint i:hover{
+    color: rgb(227, 140, 17);
+}
+#BlacklistListActive i{
+    text-align: right;
+    padding-right: 2rem;
+    color: goldenrod;
+    transition: 1s;
+    cursor: pointer;
+    font-size: 1.8rem;
+    border-bottom: solid goldenrod 1.5px;
+}
+#BlacklistListActive i:hover{
+    transition: 0.5s;
     color: rgb(227, 140, 17);
 }
 
@@ -371,6 +470,7 @@ h3 {
     color: rgb(227, 140, 17);
 }
 
+
 /* INDEX */
 
 #indexProjects {
@@ -379,8 +479,11 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-
-#indexProjectsTitle {
+.indexArticle{
+    max-width: 15rem;
+    margin: auto;
+}
+#indexProjectsTitle{
     margin-top: 2rem;
 }
 
@@ -389,7 +492,7 @@ h3 {
     margin: auto;
     margin-top: 3rem;
     margin-bottom: 1rem;
-    max-width: 50%;
+    max-width: 15rem;
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }

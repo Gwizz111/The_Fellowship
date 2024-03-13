@@ -12,7 +12,7 @@
             <a href="/html/homepage.html"><h1>The Fellowship</h1></a>
             <nav>
                 <ul>
-                    <li><a href="/html/homepage.html">Home</a></li>
+                    <li><a href="/html/homepage.html" id="navActive">Home</a></li>
                     <li><a href="/html/favourites.html">Favorieten</a></li>
                     <li><a href="/html/blacklist.html">Blacklisted</a></li>
                     <li><a href="/html/login.html">Uitloggen</a></li>
@@ -20,30 +20,41 @@
             </nav>
         </header>
         <main>
-            <h1>The Lord of the Rings quiz.</h1>
-            <h2>One quiz to rule them all.</h2>
+            <h1>The Lord of the Rings quiz</h1>
+            <h2>One quiz to rule them all</h2>
             <section id="Gamemode">
-                <div>
-                    <a href="rounds.html"><img src="/assets/images/10rondes.webp" class="element element--inset"
-                            alt="10 Rondes"></a>
+                <div id="containerGamemode">
+                    <a href="rounds.html"><img src="/assets/images/10rondes.webp" class="element element--inset" alt="10 Rondes"></a>
+                    <a href="rounds.html">
+                    <div class="overlay">
+                        <div class="text">Tijdens "10 rondes" zal je elke ronde een willekeurige quote krijgen. Deze quote moet je linken met het juiste karakter en de juiste film. Per juist antwoord krijg je 0,5punt.</div>
+                    </div>
+                    </a>
                     <h3>10 rondes</h3>
                 </div>
-                <div>
-                    <a href="suddendeath.html"><img src="/assets/images/SuddenDeath.webp" class="element element--inset"
-                            alt="SuddenDeath"></a>
+                <div id="containerGamemode">
+                    <a href="suddendeath.html"><img src="/assets/images/SuddenDeath.webp" class="element element--inset" alt="SuddenDeath"></a>
+                    <a href="suddendeath.html">
+                        <div class="overlay">
+                            <div class="text">Tijdens "Sudden Death" zal je elke ronde een willekeurige quote krijgen. Deze quote moet je linken met het juiste karakter en de juiste film. Bij 1 fout antwoord zal je verliezen.</div>
+                        </div>
+                    </a>
                     <h3>sudden death</h3>
                 </div>
             </section>
             <section id="Highscore">
-                <a>Hoogste score</a>
+                <a>Hoogste score:</a><br/>
+                <a>18</a>
             </section>
             <section id="Lists">
+                <a></a>
                 <a href="favourites.html"><button class="btn">Favorieten</button></a>
                 <a href="blacklist.html"><button class="btn">Blacklists</button></a>
+                <a></a>
             </section>
         </main>
         <footer>
-            <a href="/html/homepage.html"><h1>The Fellowship</h1></a>
+            <a href="/html/homepage.html"><h1>The Fellowship</h1>© - 2024 - all rights reserved</a>
         </footer>
     </body>
 </html>
