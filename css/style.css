@@ -704,12 +704,20 @@ select {
         text-align: center;
         letter-spacing: 1px;
         margin-left: 11px;
+        
+    }
+    #qoute{
+        max-width: 100%;
+        padding-right: 50%;
     }
 
     h2 {
         max-width: 40%;
         text-align: center;
         margin-left: 55px;
+    }
+    #answers{
+        padding: 5rem;
     }
 
     #Gamemode {
@@ -736,4 +744,6 @@ select {
         display: inline;
         margin-left: 50px;
     }
+    
+    
 }
