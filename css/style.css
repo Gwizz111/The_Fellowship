@@ -7,6 +7,7 @@ body {
         'main main main'
         'footer footer footer';
 }
+
 nav {
     grid-area: nav;
 }
@@ -90,28 +91,30 @@ header nav ul li a:hover {
     color: goldenrod;
     transition: 500ms;
 }
-#navActive{
+
+#navActive {
     background-color: #222222;
     border-radius: 0.2vw;
     color: goldenrod;
     transition: 500ms;
 }
-#navActive:hover{
+
+#navActive:hover {
     background-color: #3e3e3e;
     transition: 500ms;
 }
 
 /* FOOTER */
 
-footer{
+footer {
     text-align: center;
     margin-top: 2rem;
     border-top: goldenrod solid 3px;
-    background: rgba(33, 33, 33, .7); 
+    background: rgba(33, 33, 33, .7);
     padding: 1.5rem;
     bottom: 0;
     width: 100%;
-    height: 2rem; 
+    height: 2rem;
 }
 
 footer a {
@@ -121,12 +124,14 @@ footer a {
     font-size: 0.9rem;
     font-family: Arial, Helvetica, sans-serif;
 }
-footer h1{
+
+footer h1 {
     color: goldenrod;
     transition: 1s;
     font-size: 1.2rem;
 }
-footer h1:hover{
+
+footer h1:hover {
     color: rgb(218, 128, 32);
     transition: 1s;
 }
@@ -163,11 +168,13 @@ h3 {
     grid-template-columns: 1fr 1fr;
     column-gap: 0px;
 }
-#containerGamemodeImg{
+
+#containerGamemodeImg {
     margin: auto;
     text-align: center;
     width: 20rem;
 }
+
 #Gamemode img {
     display: block;
     margin: auto;
@@ -177,6 +184,7 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
+
 .overlay {
     position: absolute;
     display: block;
@@ -190,17 +198,19 @@ h3 {
     opacity: 0;
     transition: .5s ease;
     background: rgba(33, 33, 33, .7);
-  }
-  #containerGamemode {
+}
+
+#containerGamemode {
     position: relative;
     max-width: 20rem;
     margin: auto;
-  }
-  #containerGamemode:hover .overlay {
+}
+
+#containerGamemode:hover .overlay {
     opacity: 1;
-  }
-  
-  .text {
+}
+
+.text {
     font-family: Ringbearer;
     color: white;
     font-size: 1rem;
@@ -211,19 +221,21 @@ h3 {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-  }
-  .text a{
+}
+
+.text a {
     color: white;
     text-decoration: none;
-  }
+}
 
-#Highscore a{
+#Highscore a {
     font-family: Ringbearer;
     margin: auto;
     text-align: center;
     color: goldenrod;
 }
-#Highscore{
+
+#Highscore {
     margin: auto;
     text-align: center;
     padding: 0.5rem;
@@ -304,7 +316,8 @@ h3 {
 #answers a {
     text-decoration: none;
 }
-#answers button{
+
+#answers button {
     display: block;
     margin: auto;
     text-align: center;
@@ -375,7 +388,8 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#FavoriteListActive i{
+
+#FavoriteListActive i {
     text-align: right;
     padding-right: 2rem;
     color: goldenrod;
@@ -384,11 +398,13 @@ h3 {
     font-size: 1.8rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#FavoriteListActive i:hover{
+
+#FavoriteListActive i:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
-#FavoriteListVerwijder{
+
+#FavoriteListVerwijder {
     transition: 0.5s;
     cursor: pointer;
 }
@@ -403,17 +419,20 @@ h3 {
     text-align: right;
     margin-right: 2rem;
 }
-#containerPrint i{
+
+#containerPrint i {
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
     font-size: 2rem;
     margin-right: 10%;
 }
-#containerPrint i:hover{
+
+#containerPrint i:hover {
     color: rgb(227, 140, 17);
 }
-#BlacklistListActive i{
+
+#BlacklistListActive i {
     text-align: right;
     padding-right: 2rem;
     color: goldenrod;
@@ -422,7 +441,8 @@ h3 {
     font-size: 1.8rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#BlacklistListActive i:hover{
+
+#BlacklistListActive i:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
@@ -479,11 +499,13 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-.indexArticle{
+
+.indexArticle {
     max-width: 15rem;
     margin: auto;
 }
-#indexProjectsTitle{
+
+#indexProjectsTitle {
     margin-top: 2rem;
 }
 
@@ -573,6 +595,10 @@ select {
 }
 
 @media only screen and (max-width: 600px) {
+    #indexProjectsTitle {
+        max-width: 100%;
+    }
+
     #indexProjects {
         display: flex;
         flex-wrap: wrap;
@@ -609,5 +635,10 @@ select {
 
     #Lists {
         max-width: 51%;
+    }
+
+    #favorieten section {
+        margin-left: 2rem;
+        max-width: max-content;
     }
 }
