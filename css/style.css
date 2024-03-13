@@ -103,32 +103,33 @@ header nav ul li a:hover {
     background-color: #3e3e3e;
     transition: 500ms;
 }
+
 .navbar {
     overflow: hidden;
     background-color: #333;
-  }
-  
-  .navbar a {
+}
+
+.navbar a {
     float: left;
     font-size: 16px;
     color: #222222;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
     float: left;
     overflow: hidden;
     display: flex;
-	  align-items: center;
-	  justify-content: center;
-  }
-  
-  .dropdown .dropbtn {
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown .dropbtn {
     margin-right: 1rem;
     font-family: Ringbearer;
-    font-size: 16px;  
+    font-size: 16px;
     border: none;
     outline: none;
     color: #222222;
@@ -139,17 +140,18 @@ header nav ul li a:hover {
     padding: 10px;
     text-decoration: none;
     transition: 500ms;
-  }
-  
-  .navbar a:hover, .dropdown:hover .dropbtn {
-    
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+
     background-color: #222222;
     border-radius: 0.2vw;
     color: goldenrod;
     transition: 1s;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content a {
     float: none;
     color: #222222;
     padding: 12px 16px;
@@ -157,52 +159,55 @@ header nav ul li a:hover {
     display: block;
     text-align: left;
     transition: 0.5s;
-  }
-  
-  .dropdown-content a:hover {
+}
+
+.dropdown-content a:hover {
     background-color: #222222;
     color: goldenrod;
     transition: 0.5s;
-  }
-  
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown:hover .dropdown-content {
     display: block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     margin-top: 8%;
     margin-left: 2%;
-    transform: (0,0);
+    transform: (0, 0);
     background-color: rgb(218, 141, 32);
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-  }
-  @media only screen and (max-width: 1400px) {
+}
+
+@media only screen and (max-width: 1400px) {
     .dropdown-content {
         margin-top: 10%;
         margin-left: 3%;
-        transform: (0,0);
-      }
-  }
-  @media only screen and (max-width: 1100px) {
+        transform: (0, 0);
+    }
+}
+
+@media only screen and (max-width: 1100px) {
     .dropdown-content {
         margin-top: 12%;
         margin-left: 3%;
-        transform: (0,0);
-      }
-  }
+        transform: (0, 0);
+    }
+}
+
 /* FOOTER */
 
 footer {
     text-align: center;
     margin-top: 2rem;
     border-top: goldenrod solid 3px;
-    background: rgba(33, 33, 33, .7); 
+    background: rgba(33, 33, 33, .7);
     padding: 0.75rem;
-    position:absolute;
+    position: absolute;
     bottom: 0px;
     bottom: 0;
     width: 100%;
@@ -276,13 +281,15 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
-#Gamemode a{
+
+#Gamemode a {
     font-family: Ringbearer;
     margin: auto;
     text-align: center;
     color: goldenrod;
     text-align: center;
 }
+
 .overlay {
     position: absolute;
     display: block;
@@ -297,15 +304,17 @@ h3 {
     transition: .5s ease;
     background: rgba(33, 33, 33, .7);
 }
+
 #containerGamemode {
     position: relative;
     max-width: 20rem;
     margin: auto;
 }
-  #containerGamemode:hover .overlay {
+
+#containerGamemode:hover .overlay {
     opacity: 1;
 }
-  
+
 .text {
     font-family: Ringbearer;
     color: white;
@@ -318,11 +327,13 @@ h3 {
     transform: translate(-50%, -50%);
     text-align: center;
 }
-.text a{
+
+.text a {
     color: white;
     text-decoration: none;
 }
-#Highscore{   
+
+#Highscore {
     margin-left: 42%;
     margin-right: 42%;
     display: grid;
@@ -354,7 +365,7 @@ h3 {
     text-align: center;
     margin: auto;
     text-decoration: none;
-   
+
     font-family: Ringbearer;
     font-weight: 0;
     font-size: 1rem;
@@ -366,8 +377,8 @@ h3 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding:0.75rem 1.5rem 0.75rem;
-    
+    padding: 0.75rem 1.5rem 0.75rem;
+
     letter-spacing: 0.5px;
 }
 
@@ -735,5 +746,15 @@ select {
         max-width: 50%;
         display: inline;
         margin-left: 50px;
+    }
+
+    #Blacklist h1 {
+        display: inline;
+        margin-left: 120px;
+    }
+
+    #Blacklist section {
+        margin-left: 1rem;
+        max-width: 49%;
     }
 }
