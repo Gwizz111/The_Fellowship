@@ -18,12 +18,14 @@ body {
         'header header header'
         'main main main'
         'footer footer footer';
-        
+
 }
+
 @font-face {
     font-family: Ringbearer;
     src: url(../assets/fonts/ringbearer/Ringbearer.TTF);
 }
+
 body {
     background-image: url(../assets/images/Background.jpg);
     background-color: #cccccc;
@@ -38,14 +40,17 @@ header {
     padding: 0;
     margin: 1rem
 }
-header a{
+
+header a {
     text-decoration: none;
     font-family: Ringbearer;
 }
-header h1:hover{
+
+header h1:hover {
     transition: 1s;
     color: #cccccc;
 }
+
 header h1 {
     transition: 1s;
     text-decoration: none;
@@ -79,26 +84,29 @@ header nav ul li a:hover {
 
 /* FOOTER */
 
-footer{
+footer {
     margin-top: 2rem;
     background-color: goldenrod;
     padding: 1.5rem;
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem; 
+    height: 2.5rem;
 }
-footer a{
+
+footer a {
     margin: auto;
     color: #222222;
     text-decoration: none
 }
-footer h1{
+
+footer h1 {
     color: #222222;
     transition: 1s;
     font-size: 1.5rem;
 }
-footer h1:hover{
+
+footer h1:hover {
     color: white;
     transition: 1s;
 }
@@ -145,6 +153,7 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
+
 #Gamemode img:hover {
     transition: ease-in-out 0.5s;
     opacity: 75%;
@@ -207,19 +216,22 @@ h3 {
 .element--inset {
     border-style: inset;
 }
+
 /* 10 rondes */
-#answers{
+#answers {
     align-items: center;
-    margin: 10rem ;
+    margin: 10rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#answers a{
+
+#answers a {
     text-decoration: none;
 }
-#answers button{
+
+#answers button {
     text-align: center;
     font-family: Ringbearer;
     font-weight: 0;
@@ -230,7 +242,7 @@ h3 {
     border: solid goldenrod 2px;
     box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
     border-radius: 50px;
-    transition : 1460ms;
+    transition: 1460ms;
     transform: translateY(0);
     display: flex;
     flex-direction: row;
@@ -240,106 +252,121 @@ h3 {
 }
 
 /* Favorieten */
-#containerPrint{
+#containerPrint {
     text-align: right;
     margin-right: 2rem;
 }
-#favorieten i{
+
+#favorieten i {
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
     font-size: 4rem;
 }
-#favorieten i:hover{
+
+#favorieten i:hover {
     color: rgb(227, 140, 17);
 }
-#FavoriteList{
+
+#FavoriteList {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1.5rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#favorieten a{
+
+#favorieten a {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#FavoriteListActive{
+
+#FavoriteListActive {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#FavoriteListVerwijder{
+
+#FavoriteListVerwijder {
     transition: 0.5s;
     cursor: pointer;
 }
-#FavoriteListVerwijder:hover{
+
+#FavoriteListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
+
 /* Blacklist */
-#containerPrint{
+#containerPrint {
     text-align: right;
     margin-right: 2rem;
 }
-#Blacklist i{
+
+#Blacklist i {
     color: goldenrod;
     transition: 1s;
     cursor: pointer;
     font-size: 4rem;
 }
-#Blacklist i:hover{
+
+#Blacklist i:hover {
     color: rgb(227, 140, 17);
 }
-#BlacklistList{
+
+#BlacklistList {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1.5rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#Blacklist a{
+
+#Blacklist a {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid goldenrod 1.5px;
 }
-#BlacklistListActive{
+
+#BlacklistListActive {
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1rem;
-    
+
     margin-right: 10%;
     margin-left: 10%;
     display: grid;
-    align-items: top; 
+    align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#BlacklistListVerwijder{
+
+#BlacklistListVerwijder {
     transition: 0.5s;
     cursor: pointer;
 }
-#BlacklistListVerwijder:hover{
+
+#BlacklistListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
@@ -352,10 +379,12 @@ h3 {
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
 }
-#indexProjectsTitle{
+
+#indexProjectsTitle {
     margin-top: 2rem;
 }
-#indexProjects img{
+
+#indexProjects img {
     display: block;
     margin: auto;
     margin-top: 3rem;
@@ -364,6 +393,7 @@ h3 {
     border-color: goldenrod;
     transition: ease-in-out 0.5s;
 }
+
 #indexProjects img:hover {
     transition: ease-in-out 0.5s;
     opacity: 75%;
@@ -371,13 +401,14 @@ h3 {
 }
 
 /* LOGIN */
-#inlogPage{
+#inlogPage {
     display: flex;
     font-family: Ringbearer;
     color: goldenrod;
     font-size: 1.2rem;
 }
-#inlogPageForm{
+
+#inlogPageForm {
     margin: auto;
     margin-top: 2rem;
     text-align: center;
@@ -385,6 +416,7 @@ h3 {
     border: goldenrod 3px solid;
     border-radius: 15px;
 }
+
 #btnForm {
     text-align: center;
     font-family: Ringbearer;
@@ -400,6 +432,7 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+
 #btnForm:hover {
 
     transition: 1460ms;
@@ -407,7 +440,9 @@ h3 {
     color: goldenrod;
     border: solid 2px goldenrod;
 }
-#inlogPageForm input[type=text], select {
+
+#inlogPageForm input[type=text],
+select {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -419,7 +454,9 @@ h3 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-#inlogPageForm input[type=password], select {
+
+#inlogPageForm input[type=password],
+select {
     width: 100%;
     padding: 12px 20px;
     display: inline-block;
@@ -430,4 +467,22 @@ h3 {
     box-sizing: border-box;
     margin-top: 1rem;
     margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #indexProjects {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #indexProjects article {
+        flex-basis: 33%;
+        padding: 5%;
+    }
+
+    #indexProjects img {
+        max-width: 60%;
+        border-width: 7px;
+    }
 }
