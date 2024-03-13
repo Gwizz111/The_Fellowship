@@ -637,8 +637,19 @@ select {
         max-width: 51%;
     }
 
+    #favorieten h1 {
+        display: inline;
+        margin-left: 120px;
+    }
+
     #favorieten section {
-        margin-left: 2rem;
-        max-width: max-content;
+        margin-left: 1rem;
+        max-width: 49%;
+    }
+
+    #containerPrint {
+        max-width: 50%;
+        display: inline;
+        margin-left: 50px;
     }
 }
