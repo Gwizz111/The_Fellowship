@@ -202,12 +202,19 @@ footer {
     margin-top: 2rem;
     border-top: goldenrod solid 3px;
     background: rgba(33, 33, 33, .7); 
-    padding: 0.75rem;
-    position:absolute;
-    bottom: 0px;
-    bottom: 0;
-    width: 100%;
+    padding: 1.2rem;
     height: 2rem;
+}
+.footerAbsolute {
+    text-align: center;
+    margin-top: 2rem;
+    border-top: goldenrod solid 3px;
+    background: rgba(33, 33, 33, .7); 
+    padding: 1.2rem;
+    height: 2rem;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }
 
 footer a {
@@ -324,6 +331,7 @@ h3 {
     text-decoration: none;
 }
 #Highscore{   
+    margin-top: 1rem;
     margin-left: 42%;
     margin-right: 42%;
     display: grid;
