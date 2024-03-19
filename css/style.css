@@ -214,6 +214,7 @@ footer {
     height: 2rem;
     position: fixed;
     bottom: 0px;
+    bottom: 0;
     width: 100%;
 }
 
@@ -818,11 +819,24 @@ select {
         text-align: center;
         letter-spacing: 1px;
         margin: 0 auto;
+        
     }
-
+    #qoute{
+        max-width: 100%;
+        margin: 0 auto;
+    }
+   
     h2 {
         max-width: 40%;
         text-align: center;
+        margin-left: 55px;
+    }
+    #answers{
+        padding: 5rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        grid-gap: 1rem;
         margin: 0 auto;
     }
 
@@ -853,6 +867,8 @@ select {
         display: inline;
         margin-left: 50px;
     }
+    
+    
     #Lists {
         max-width: 100vw;
         display: grid;
