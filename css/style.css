@@ -629,6 +629,10 @@ h3 {
     color: var(--primary-color);
     font-size: 1.2rem;
 }
+#inlogPage a{
+    color: var(--primary-color);
+    text-decoration: none;
+}
 
 #inlogPageForm {
     margin: auto;
