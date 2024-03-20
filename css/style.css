@@ -861,8 +861,8 @@ select {
     }
 
     #favorieten section {
-        margin-left: 1rem;
-        max-width: 49%;
+        margin: auto;
+        max-width: 80%;
     }
 
     #containerPrint {
