@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The LOTR quiz - Home</title>
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <%- include("partials/header") %>
+        <main>
+            <h1>The Lord of the Rings quiz</h1>
+            <h2>One quiz to rule them all</h2>
+            <section id="Gamemode">
+                <div id="containerGamemode">
+                    <a href="../rounds"><img src="/assets/images/10rondes.webp" class="element element--inset" alt="10 Rondes"></a>
+                    <a href="../rounds">
+                    <div class="overlay">
+                        <div class="text">Tijdens "10 rondes" zal je elke ronde een willekeurige quote krijgen. Deze quote moet je linken met het juiste karakter en de juiste film. Per juist antwoord krijg je 0,5punt.</div>
+                    </div>
+                    </a>
+                    <h3>10 rondes</h3>
+                </div>
+                <div id="containerGamemode">
+                    <a href="../suddendeath"><img src="/assets/images/SuddenDeath.webp" class="element element--inset" alt="SuddenDeath"></a>
+                    <a href="../suddendeath">
+                        <div class="overlay">
+                            <div class="text">Tijdens "Sudden Death" zal je elke ronde een willekeurige quote krijgen. Deze quote moet je linken met het juiste karakter en de juiste film. Bij 1 fout antwoord zal je verliezen.</div>
+                        </div>
+                    </a>
+                    <h3>sudden death</h3>
+                </div>
+            </section>
+            <section id="Highscore"> 
+            <section id="Lists">
+                    <p>hoogste score 10 rondes: 5</p>
+                    <p>hoogste score sudden death: 18</p>
+            </section>
+        </main>
+        <%- include("partials/footer") %>
+    </body>
+</html>
