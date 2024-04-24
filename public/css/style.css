@@ -900,6 +900,8 @@ select {
     #qoute {
         max-width: 100%;
         margin: 0 auto;
+        margin-left: 2rem;
+        margin-right: 2rem;
     }
 
     h2 {
