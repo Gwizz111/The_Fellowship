@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,21 @@
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
     <main>
         <h1 id="indexProjectsTitle">Login</h1>
         <section id="inlogPage">
-            <form action="#" id="inlogPageForm">
+            <form action="/login" method="post" id="inlogPageForm">
                 <label for="username">Gebruikersnaam:</label><br>
-                <input type="text" id="username" name="username" value="username..." onfocus=this.value=''><br>
+                <input type="username" id="username" name="username" placeholder="Username" onfocus=this.value='' /><br>
                 <label for="password">Wachtwoord:</label><br>
-                <input type="password" id="wachtwoord" name="wachtwoord" value="wachtwoord" onfocus=this.value=''><br><br>
+                <input type="password" id="password" name="password" value="password" onfocus=this.value=''><br><br>
                 <input type="submit" id="btnForm" value="inloggen"><br><br>
                 <label><a href="/registreer">registreer</a></label>
-            </form> 
+            </form>
         </section>
     </main>
 </body>
+
 </html>
