@@ -63,6 +63,13 @@ app.get("/quotes",async (req,res) =>{
     res.json(quotes);
 });
 
+app.get("/Movie",async (req,res)=>{
+  let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+  let Movies = await response.json();
+  res.type("application/json");
+  res.json(Movies);
+})
+
 
 
 app.listen(app.get("port"), () =>
