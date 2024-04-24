@@ -67,10 +67,11 @@ app.get("/rounds",async (req, res) => {
     MovieData = require("./api/Movie.json");
   }
   MovieDocs = MovieData.docs;
-  MoviePick = Math.floor(Math.random() * MovieDocs.length);
-
-  Movieid = MovieDocs[MoviePick].id;
-  Movie = MovieDocs[MoviePick].name;
+  do{
+    MoviePick = Math.floor(Math.random() * MovieDocs.length);
+    Movieid = MovieDocs[MoviePick].id;
+    Movie = MovieDocs[MoviePick].name;
+  } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
   
   try {
     let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
