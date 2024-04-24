@@ -30,17 +30,29 @@ let quotePick: number = 0;
 let quotesDocs: any;
 let quote: string = "";
 let quoteid: string = "";
+
+
+let cMovie: string = "";
+let cMovieid: string = "";
+
+let ccharacter: string = "";
+let ccharacterid: string = "";
+
 let MovieData: any;
 let MoviePick: number = 0;
 let MovieDocs: any;
 let Movie: string = "";
 let Movieid: string = "";
+
+
+
 let characterData: any;
 let characterPick: number = 0;
 let characterDocs: any;
 let character: string = "";
 let characterid: string = "";
 app.get("/rounds",async (req, res) => {
+  do{
   try {
     let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
     let data = await response.json();
@@ -59,6 +71,8 @@ app.get("/rounds",async (req, res) => {
     quote = '"' + quote + '"';
   }
 
+
+ 
   try {
     let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
     let data = await response.json();
@@ -72,6 +86,15 @@ app.get("/rounds",async (req, res) => {
   Movieid = MovieDocs[MoviePick].id;
   Movie = MovieDocs[MoviePick].name;
   
+  cMovieid = quotesDocs[quotePick].movie;
+  
+  for (let index = 0; index < MovieDocs.length; index++) {
+    const element = MovieDocs[index];
+    if(element._id == cMovieid){
+      cMovie = element.name;
+    }
+  }
+
   try {
     let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
     let data = await response.json();
@@ -85,8 +108,17 @@ app.get("/rounds",async (req, res) => {
   characterid = characterDocs[characterPick].id;
   character = characterDocs[characterPick].name;
   
+  ccharacterid=quotesDocs[quotePick].character;
+  for (let index = 0; index < characterDocs.length; index++) {
+    const element = characterDocs[index];
+    if(element._id == ccharacterid){
+      ccharacter = element.name;
+    }
+  }
+  }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER") 
+
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,character});
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,character,cMovie,ccharacter});
 });
 
 app.get("/suddendeath", (req, res) => {
