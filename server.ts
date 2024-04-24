@@ -30,7 +30,16 @@ let quotePick: number = 0;
 let quotesDocs: any;
 let quote: string = "";
 let quoteid: string = "";
-
+let MovieData: any;
+let MoviePick: number = 0;
+let MovieDocs: any;
+let Movie: string = "";
+let Movieid: string = "";
+let characterData: any;
+let characterPick: number = 0;
+let characterDocs: any;
+let character: string = "";
+let characterid: string = "";
 app.get("/rounds",async (req, res) => {
   try {
     let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
@@ -50,8 +59,34 @@ app.get("/rounds",async (req, res) => {
     quote = '"' + quote + '"';
   }
 
+  try {
+    let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+    let data = await response.json();
+    MovieData = data;
+  } catch (error) {
+    MovieData = require("./api/Movie.json");
+  }
+  MovieDocs = MovieData.docs;
+  MoviePick = Math.floor(Math.random() * MovieDocs.length);
+
+  Movieid = MovieDocs[MoviePick].id;
+  Movie = MovieDocs[MoviePick].name;
+  
+  try {
+    let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
+    let data = await response.json();
+    characterData = data;
+  } catch (error) {
+    characterData = require("./api/character.json");
+  }
+  characterDocs = characterData.docs;
+  characterPick = Math.floor(Math.random() * characterDocs.length);
+
+  characterid = characterDocs[characterPick].id;
+  character = characterDocs[characterPick].name;
+  
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote});
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,character});
 });
 
 app.get("/suddendeath", (req, res) => {
