@@ -24,9 +24,34 @@ app.get("/homepage", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
 });
 
-app.get("/rounds", (req, res) => {
+//The One API
+let quotesData: any;
+let quotePick: number = 0;
+let quotesDocs: any;
+let quote: string = "";
+let quoteid: string = "";
+
+app.get("/rounds",async (req, res) => {
+  try {
+    let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
+    let data = await response.json();
+    quotesData = data;
+  } catch (error) {
+    quotesData = require("./api/quotes.json");
+  }
+
+  quotesDocs = quotesData.docs;
+  quotePick = Math.floor(Math.random() * quotesDocs.length);
+
+  quoteid = quotesDocs[quotePick].id;
+  quote = quotesDocs[quotePick].dialog;
+
+  if (!quote.includes('"')) {
+    quote = '"' + quote + '"';
+  }
+
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs");
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote});
 });
 
 app.get("/suddendeath", (req, res) => {
@@ -53,17 +78,6 @@ app.get("/registreer", (req, res) => {
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/registreer.ejs");
 });
-
-
-//The One API
-app.get("/quotes",async (req,res) =>{
-  let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
-    let quotes = await response.json();
-    res.type("application/json");
-    res.json(quotes);
-});
-
-
 
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
