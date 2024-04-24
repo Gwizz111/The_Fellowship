@@ -4,44 +4,46 @@ const app = express();
 app.set("view engine", "ejs"); // EJS als view engine
 app.set("port", 3000);
 
+app.use(express.static(__dirname + '/public'));
+
 app.get("/", (req, res) => {
   res.type("text/html");
-  res.render("index");
+  res.render("/workspaces/The_Fellowship/public/views/index.ejs");
 });
 
 app.get("/homepage", (req, res) => {
   res.type("text/html");
-  res.render("homepage");
+  res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
 });
 
 app.get("/rounds", (req, res) => {
   res.type("text/html");
-  res.render("rounds");
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs");
 });
 
 app.get("/suddendeath", (req, res) => {
   res.type("text/html");
-  res.render("suddendeath");
+  res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs");
 });
 
 app.get("/favourites", (req, res) => {
   res.type("text/html");
-  res.render("favourites");
+  res.render("/workspaces/The_Fellowship/public/views/favourites.ejs");
 });
 
 app.get("/blacklist", (req, res) => {
   res.type("text/html");
-  res.render("blacklist");
+  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
 });
 
 app.get("/login", (req, res) => {
   res.type("text/html");
-  res.render("login");
+  res.render("/workspaces/The_Fellowship/public/views/login.ejs");
 });
 
 app.get("/registreer", (req, res) => {
   res.type("text/html");
-  res.render("registreer");
+  res.render("/workspaces/The_Fellowship/public/views/registreer.ejs");
 });
 
 app.listen(app.get("port"), () =>
