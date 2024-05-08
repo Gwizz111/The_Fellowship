@@ -14,27 +14,27 @@
 <body>
     <%- include("partials/header") %>
     <main>
-        <h1 id="qoute"><%= quote %></h1>
+        <h1 id="qoute"><%= chosenQuote.text %></h1>
         <section id="answers">
             <div>
-                <a href="#"><button id="btn"><h3><%= character %></h3></button></a>
+                <a href="#"><button id="btn"><h3><%= chosenQuote.answers[0] %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button id="btn"><h3><%= character2 %></h3></button></a>
+                <a href="#"><button id="btn"><h3><%= chosenQuote.answers[1] %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button id="btn"><h3><%= ccharacter %></h3></button></a>
+                <a href="#"><button id="btn"><h3><%= chosenQuote.answers[2] %></h3></button></a>
             </div>
         </section>
         <section id="answers">
             <div>
-                <a href="#"><button class="btn"><h3><%= cMovie %></h3></button></a>
+                <a href="#"><button class="btn"><h3><%= chosenQuote.movie[0] %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button class="btn"><h3><%= Movie2 %></h3></button></a>
+                <a href="#"><button class="btn"><h3><%= chosenQuote.movie[1] %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button class="btn"><h3><%= Movie %></h3></button></a>
+                <a href="#"><button class="btn"><h3><%= chosenQuote.movie[2] %></h3></button></a>
             </div>
         </section><section id="submit">
             <div>
