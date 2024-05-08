@@ -123,12 +123,14 @@ let cMovie: string = "";
 let cMovieid: string = "";
 
 let ccharacter: string = "";
+let ccharacter2: string = "";
 let ccharacterid: string = "";
 
 let MovieData: any;
 let MoviePick: number = 0;
 let MovieDocs: any;
 let Movie: string = "";
+let Movie2: string = "";
 let Movieid: string = "";
 
 
@@ -137,6 +139,7 @@ let characterData: any;
 let characterPick: number = 0;
 let characterDocs: any;
 let character: string = "";
+let character2: string = "";
 let characterid: string = "";
 app.get("/rounds",async (req, res) => {
   do{
@@ -173,6 +176,12 @@ app.get("/rounds",async (req, res) => {
     Movieid = MovieDocs[MoviePick].id;
     Movie = MovieDocs[MoviePick].name;
   } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
+
+  do{
+    MoviePick = Math.floor(Math.random() * MovieDocs.length);
+    Movieid = MovieDocs[MoviePick].id;
+    Movie2 = MovieDocs[MoviePick].name;
+  } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series");
   
   cMovieid = quotesDocs[quotePick].movie;
   
@@ -196,6 +205,11 @@ app.get("/rounds",async (req, res) => {
   characterid = characterDocs[characterPick].id;
   character = characterDocs[characterPick].name;
   
+  characterPick = Math.floor(Math.random() * characterDocs.length);
+
+  characterid = characterDocs[characterPick].id;
+  character2 = characterDocs[characterPick].name;
+
   ccharacterid=quotesDocs[quotePick].character;
   for (let index = 0; index < characterDocs.length; index++) {
     const element = characterDocs[index];
@@ -203,10 +217,10 @@ app.get("/rounds",async (req, res) => {
       ccharacter = element.name;
     }
   }
-  }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER") 
+  }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER");
 
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,character,cMovie,ccharacter});
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,Movie2,character,character2,cMovie,ccharacter});
 });
 
 app.get("/suddendeath", (req, res) => {
