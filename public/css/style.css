@@ -448,6 +448,11 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+.btnactive{
+    transition: ease-in 0.5s;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
 
 #submit {
     align-items: center;

@@ -8,7 +8,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script type="module" src="/public/js/button.js" defer></script>
+    <script>
+        let activeButton = null;
+        let activeButton2 =null;
 
+        function changeColor(buttonId) {
+        const buttons = document.querySelectorAll('.btn');
+        
+        console.log("test");
+        // Verwijder 'active' klasse van alle knoppen
+        buttons.forEach(button => {
+            document.getElementById(buttonId).classList.add('btn');
+            document.getElementById(buttonId).classList.remove('btnactive');
+            console.log("test1");
+        });
+
+        // Als de huidige knop niet actief is, maak deze actief
+        if (activeButton !== buttonId) {
+            //buttonId.classList.replace('btn','btnactive');
+            document.getElementById(buttonId).classList.remove('btn');
+            document.getElementById(buttonId).classList.add('btnactive');
+            activeButton = buttonId;
+            console.log("test2");
+        } else {
+            activeButton = null; // Als de knop al actief is, deactiveer deze
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -17,13 +44,13 @@
         <h1 id="qoute"><%= quote %></h1>
         <section id="answers">
             <div>
-                <a href="#"><button id="btn"><h3><%= character %></h3></button></a>
+                <a href="#"><button id="btn1" class="btn" onclick="changeColor(this.id)"><h3><%= character %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button id="btn"><h3><%= character2 %></h3></button></a>
+                <a href="#"><button id="btn2" class="btn"><h3><%= character2 %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button id="btn"><h3><%= ccharacter %></h3></button></a>
+                <a href="#"><button id="btn3" class="btn"><h3><%= ccharacter %></h3></button></a>
             </div>
         </section>
         <section id="answers">
