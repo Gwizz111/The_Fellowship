@@ -1,7 +1,7 @@
 import express from "express";
 import { randomInt } from "crypto";
 import CryptoJS from "crypto-js";
-import {MongoClient, ObjectId} from "mongodb"
+import {MongoClient, ObjectId, Document, PushOperator, PullOperator} from "mongodb"
 
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
@@ -100,6 +100,7 @@ app.post("/registreer", async (req: any, res: any) => {
     client.db("fellowship")
     .collection("users")
     .insertOne(newUser);
+    currentUserId = newUser._id
     res.redirect("/homepage")
   }
 });
@@ -138,12 +139,86 @@ let characterPick: number = 0;
 let characterDocs: any;
 let character: string = "";
 let characterid: string = "";
+
+const favorite = async (userId: ObjectId, quoteId: string, remove: boolean) => {
+  let user:any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .findOne({userId: userId});
+
+  if (user == null) {
+    let newUser = await client
+    .db("fellowship")
+    .collection("favorites")
+    .insertOne({userId: userId, quoteId: []}) 
+  }
+
+  if (remove == false) {
+    let addQuote = await client
+    .db("fellowship")
+    .collection("favorites")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
+    );
+    console.log("added")
+  }
+  else if (remove == true) {
+    let deleteQuote = await client
+    .db("fellowship")
+    .collection("favorites")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+    )
+  }
+};
+
+const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => {
+  let user:any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .findOne({userId: userId});
+
+  if (user == null) {
+    let newUser = await client
+    .db("fellowship")
+    .collection("blacklists")
+    .insertOne({userId: userId, quoteId: []}) 
+  }
+
+  let hasFavorite: any = await client
+    .db("undefined")
+    .collection("favorites")
+    .findOne({ userId: new ObjectId(userId), quoteId: quoteId });
+
+  if (hasFavorite != null || (hasFavorite != undefined && remove == false)) {
+    let deleteQuote = await client
+      .db("undefined")
+      .collection("favorites")
+      .updateOne(
+        { userId: new ObjectId(userId) },
+        { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+      );
+  }
+}
+
+interface Quote {
+  _id: string,
+  dialog: string,
+  movie: string,
+  character: string,
+  id: string
+}
+
 app.get("/rounds",async (req, res) => {
   do{
   try {
-    let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
-    let data = await response.json();
-    quotesData = data;
+    let response = await client
+    .db("fellowship")
+    .collection("quotes")
+    .find({})
+    console.log(response);
   } catch (error) {
     quotesData = require("./api/quotes.json");
   }
@@ -153,12 +228,12 @@ app.get("/rounds",async (req, res) => {
 
   quoteid = quotesDocs[quotePick].id;
   quote = quotesDocs[quotePick].dialog;
-
+  favorite(currentUserId,"5cd96e05de30eff6ebcceae1",true)
   if (!quote.includes('"')) {
     quote = '"' + quote + '"';
   }
 
-
+  
  
   try {
     let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
@@ -208,6 +283,8 @@ app.get("/rounds",async (req, res) => {
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,character,cMovie,ccharacter});
 });
+
+
 
 app.get("/suddendeath", (req, res) => {
   res.type("text/html");
