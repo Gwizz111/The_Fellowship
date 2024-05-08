@@ -148,7 +148,7 @@ app.get("/rounds",async (req, res) => {
     let data = await response.json();
     quotesData = data;
   } catch (error) {
-    quotesData = require("./api/quotes.json");
+    quotesData = require("../The_Fellowship/api/quotes.json");
   }
 
   quotesDocs = quotesData.docs;

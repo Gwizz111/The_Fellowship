@@ -15,26 +15,71 @@
 
         function changeColor(buttonId) {
         const buttons = document.querySelectorAll('.btn');
-        
-        console.log("test");
+
         // Verwijder 'active' klasse van alle knoppen
-        buttons.forEach(button => {
-            document.getElementById(buttonId).classList.add('btn');
-            document.getElementById(buttonId).classList.remove('btnactive');
-            console.log("test1");
-        });
+        for (var i = 0; i < buttons.length; i++) {
+            let id = "btn"+(i+1);
+            switch(id) {
+                case "btn1":
+                    var element = document.getElementById("btn1");
+                    break;
+                case "btn2":
+                    var element = document.getElementById("btn2");
+                    break;
+                case "btn3":
+                    var element = document.getElementById("btn3");
+                    break;
+            }
+            
+            if(element.classList.contains('btnactive')) {
+                document.getElementById(id).removeAttribute("class", 'btnactive');
+                document.getElementById(id).setAttribute("class", 'btn');
+            }
+        }
 
         // Als de huidige knop niet actief is, maak deze actief
         if (activeButton !== buttonId) {
-            //buttonId.classList.replace('btn','btnactive');
             document.getElementById(buttonId).classList.remove('btn');
             document.getElementById(buttonId).classList.add('btnactive');
             activeButton = buttonId;
-            console.log("test2");
         } else {
             activeButton = null; // Als de knop al actief is, deactiveer deze
         }
     }
+        function changeColor2(buttonId) {
+            const buttons = document.querySelectorAll('.btn');
+
+            // Verwijder 'active' klasse van alle knoppen
+            for (var i = 0; i < buttons.length; i++) {
+                let id2 = "btnn"+(i+1);
+                switch(id2) {
+                    case "btnn1":
+                        var element2 = document.getElementById("btnn1");
+                        break;
+                    case "btnn2":
+                        var element2 = document.getElementById("btnn2");
+                        break;
+                    case "btn3":
+                        var element2 = document.getElementById("btnn3");
+                        break;
+                }
+                
+                if(element2.classList.contains('btnactive')) {
+                    document.getElementById(id2).removeAttribute("class", 'btnactive');
+                    document.getElementById(id2).setAttribute("class", 'btn');
+                }
+            }
+
+            // Als de huidige knop niet actief is, maak deze actief
+            if (activeButton2 !== buttonId) {
+                document.getElementById(buttonId).classList.remove('btn');
+                document.getElementById(buttonId).classList.add('btnactive');
+                activeButton2 = buttonId;
+            } else {
+                activeButton2 = null; // Als de knop al actief is, deactiveer deze
+            }
+        }
+        
     </script>
 </head>
 
@@ -44,24 +89,24 @@
         <h1 id="qoute"><%= quote %></h1>
         <section id="answers">
             <div>
-                <a href="#"><button id="btn1" class="btn" onclick="changeColor(this.id)"><h3><%= character %></h3></button></a>
+                <a href="#"><button id="btn1" class="btn" type="button" onclick="changeColor(this.id)"><h3><%= character %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button id="btn2" class="btn"><h3><%= character2 %></h3></button></a>
+                <a href="#"><button id="btn2" class="btn" type="button" onclick="changeColor(this.id)"><h3><%= character2 %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button id="btn3" class="btn"><h3><%= ccharacter %></h3></button></a>
+                <a href="#"><button id="btn3" class="btn" type="button" onclick="changeColor(this.id)"><h3><%= ccharacter %></h3></button></a>
             </div>
         </section>
         <section id="answers">
             <div>
-                <a href="#"><button class="btn"><h3><%= cMovie %></h3></button></a>
+                <a href="#"><button id="btnn1" class="btn" type="button" onclick="changeColor2(this.id)"><h3><%= cMovie %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button class="btn"><h3><%= Movie2 %></h3></button></a>
+                <a href="#"><button id="btnn2" class="btn" type="button" onclick="changeColor2(this.id)"><h3><%= Movie2 %></h3></button></a>
             </div>
             <div>
-                <a href="#"><button class="btn"><h3><%= Movie %></h3></button></a>
+                <a href="#"><button id="btnn3" class="btn" type="button" onclick="changeColor2(this.id)"><h3><%= Movie %></h3></button></a>
             </div>
         </section><section id="submit">
             <div>
