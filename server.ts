@@ -211,19 +211,40 @@ interface Quote {
   id: string
 }
 
+interface Movie {
+  _id: string,
+  name: string,
+  runtimeInMinutes: number,
+  budgetInMillions: number,
+  boxOfficeRevenueInMillions: number,
+  academyAwardNominations: number,
+  academyAwardWins: number,
+  rottenTomatoesScore: number
+}
+
+interface Character {
+  _id: string
+  birth: string
+  death: string
+  hair: string
+  gender: string
+  height: string
+  realm: string
+  spouse: string
+  name: string
+  race: string
+  wikiUrl: string
+}
+
 app.get("/rounds",async (req, res) => {
-  do{
-  try {
-    let response = await client
+  
+  let quotes = await client
     .db("fellowship")
     .collection("quotes")
-    .find({})
-    console.log(response);
-  } catch (error) {
-    quotesData = require("./api/quotes.json");
-  }
+    .find<Quote>({})
+  let quotesResult = await quotes.toArray();
 
-  quotesDocs = quotesData.docs;
+  quotesDocs = quotesResult;
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
   quoteid = quotesDocs[quotePick].id;
@@ -235,14 +256,15 @@ app.get("/rounds",async (req, res) => {
 
   
  
-  try {
-    let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
-    let data = await response.json();
-    MovieData = data;
-  } catch (error) {
-    MovieData = require("./api/Movie.json");
-  }
-  MovieDocs = MovieData.docs;
+  let movies = await client
+    .db("fellowship")
+    .collection("movies")
+    .find<Movie>({})
+  let movieResult = await movies.toArray();
+  console.log(movieResult)
+
+  MovieDocs = movieResult;
+
   do{
     MoviePick = Math.floor(Math.random() * MovieDocs.length);
     Movieid = MovieDocs[MoviePick].id;
@@ -258,14 +280,15 @@ app.get("/rounds",async (req, res) => {
     }
   }
 
-  try {
-    let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
-    let data = await response.json();
-    characterData = data;
-  } catch (error) {
-    characterData = require("./api/character.json");
-  }
-  characterDocs = characterData.docs;
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+  let characterResult = await characters.toArray();
+  console.log(characterResult)
+
+  
+  characterDocs = characterResult;
   characterPick = Math.floor(Math.random() * characterDocs.length);
 
   characterid = characterDocs[characterPick].id;
@@ -278,8 +301,6 @@ app.get("/rounds",async (req, res) => {
       ccharacter = element.name;
     }
   }
-  }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER") 
-
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,character,cMovie,ccharacter});
 });
