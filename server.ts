@@ -261,7 +261,6 @@ app.get("/rounds",async (req, res) => {
     .collection("movies")
     .find<Movie>({})
   let movieResult = await movies.toArray();
-  console.log(movieResult)
 
   MovieDocs = movieResult;
 
@@ -285,7 +284,6 @@ app.get("/rounds",async (req, res) => {
     .collection("characters")
     .find<Character>({})
   let characterResult = await characters.toArray();
-  console.log(characterResult)
 
   
   characterDocs = characterResult;
