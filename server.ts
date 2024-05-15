@@ -284,6 +284,14 @@ app.get("/rounds",async (req, res) => {
     Movie = MovieDocs[MoviePick].name;
   } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
   
+  try {
+    let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+    let data = await response.json();
+    MovieData = data;
+  } catch (error) {
+    MovieData = require("./api/Movie.json");
+  }
+  MovieDocs = MovieData.docs;
   cMovieid = quotesDocs[quotePick].movie;
   
   for (let index = 0; index < MovieDocs.length; index++) {
