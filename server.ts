@@ -233,7 +233,6 @@ app.get("/rounds",async (req, res) => {
     .collection("movies")
     .find<Movie>({}).toArray();
   MovieDocs = movies;
-  console.log(movies)
   cMovieid = quotesDocs[quotePick].movie;
   
   for (let index = 0; index < MovieDocs.length; index++) {
@@ -394,14 +393,11 @@ app.post("/rounds",async (req, res) => {
       quote = '"' + quote + '"';
     }
   
-    try {
-      let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
-      let data = await response.json();
-      MovieData = data;
-    } catch (error) {
-      MovieData = require("./api/Movie.json");
-    }
-    MovieDocs = MovieData.docs;
+    let movies = await client
+    .db("fellowship")
+    .collection("movies")
+    .find<Movie>({}).toArray();
+    MovieDocs = movies;
     for (let index = 0; index < MovieDocs.length; index++) {
       const element = MovieDocs[index];
       if(element._id == cMovieid){
