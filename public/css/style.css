@@ -425,7 +425,7 @@ h3 {
 /* 10 rondes */
 #answers {
     align-items: center;
-    margin: 1.5rem;
+    margin: 1rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -479,7 +479,7 @@ h3 {
 
 #submit {
     align-items: center;
-    margin: 5rem 0.2rem;
+    margin: 2.5rem 0.2rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;

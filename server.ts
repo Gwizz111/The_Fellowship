@@ -394,31 +394,33 @@ app.post("/rounds",async (req, res) => {
       quote = '"' + quote + '"';
     }
   
-    let movies = await client
-    .db("fellowship")
-    .collection("movies")
-    .find<Movie>({}).toArray();
-    MovieDocs = movies;
-    do{
-      MoviePick = Math.floor(Math.random() * MovieDocs.length);
-      Movieid = MovieDocs[MoviePick].id;
-      Movie = MovieDocs[MoviePick].name;
-    } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
-  
-    do{
-      MoviePick = Math.floor(Math.random() * MovieDocs.length);
-      Movieid = MovieDocs[MoviePick].id;
-      Movie2 = MovieDocs[MoviePick].name;
-    } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series");
-    
-    cMovieid = quotesDocs[quotePick].movie;
-    
+    try {
+      let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+      let data = await response.json();
+      MovieData = data;
+    } catch (error) {
+      MovieData = require("./api/Movie.json");
+    }
+    MovieDocs = MovieData.docs;
     for (let index = 0; index < MovieDocs.length; index++) {
       const element = MovieDocs[index];
       if(element._id == cMovieid){
         cMovie = element.name;
       }
     }
+  
+    do{
+      MoviePick = Math.floor(Math.random() * MovieDocs.length);
+      Movieid = MovieDocs[MoviePick].id;
+      Movie = MovieDocs[MoviePick].name;
+    } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series" || Movie===cMovie);
+  
+    do{
+      MoviePick = Math.floor(Math.random() * MovieDocs.length);
+      Movieid = MovieDocs[MoviePick].id;
+      Movie2 = MovieDocs[MoviePick].name;
+    } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series" || Movie2===cMovie || Movie2===Movie);
+  
   
     let characters = await client
     .db("fellowship")
