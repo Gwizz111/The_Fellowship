@@ -28,7 +28,9 @@ app.set("port", 3000);
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.urlencoded({ extended:true}))
+app.use(express.urlencoded({ extended:true}));
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended:true}));
 
 app.get("/", (req, res) => {
   res.type("text/html");
@@ -118,6 +120,8 @@ interface Question {
 }
 
 //The One API
+let score: number = 0;
+
 let quotesData: any;
 let quotePick: number = 0;
 let quotesDocs: any;
@@ -180,8 +184,6 @@ app.get("/rounds",async (req, res) => {
     quote = '"' + quote + '"';
   }
 
-
- 
   try {
     let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
     let data = await response.json();
@@ -253,7 +255,7 @@ app.get("/rounds",async (req, res) => {
   chosenQuote.movie=shuffleArray(chosenQuote.movie)
 
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote});
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote,score});
 });
 
 app.get("/suddendeath", (req, res) => {
@@ -271,7 +273,114 @@ app.get("/blacklist", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
 });
 
+app.post("/rounds",async (req, res) => {
+  const givenCharacter = req.body.selectedCharacter;
+  const givenMovie = req.body.selectedMovie;
+  const correctCharacter = ccharacter;
+  const correctMovie = cMovie;
 
+
+  if (givenCharacter === correctCharacter && givenMovie === correctMovie) {
+    score = score + 1;
+  }
+  if (
+    (givenCharacter === correctCharacter && givenMovie !== correctMovie) ||
+    (givenCharacter !== correctCharacter && givenMovie === correctMovie)
+  ) {
+    score = score + 0.5;
+  }
+
+  do{
+    try {
+      let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
+      let data = await response.json();
+      quotesData = data;
+    } catch (error) {
+      quotesData = require("../The_Fellowship/api/quotes.json");
+    }
+  
+    quotesDocs = quotesData.docs;
+    quotePick = Math.floor(Math.random() * quotesDocs.length);
+  
+    quoteid = quotesDocs[quotePick].id;
+    quote = quotesDocs[quotePick].dialog;
+  
+    if (!quote.includes('"')) {
+      quote = '"' + quote + '"';
+    }
+  
+    try {
+      let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+      let data = await response.json();
+      MovieData = data;
+    } catch (error) {
+      MovieData = require("./api/Movie.json");
+    }
+    MovieDocs = MovieData.docs;
+    do{
+      MoviePick = Math.floor(Math.random() * MovieDocs.length);
+      Movieid = MovieDocs[MoviePick].id;
+      Movie = MovieDocs[MoviePick].name;
+    } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
+  
+    do{
+      MoviePick = Math.floor(Math.random() * MovieDocs.length);
+      Movieid = MovieDocs[MoviePick].id;
+      Movie2 = MovieDocs[MoviePick].name;
+    } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series");
+    
+    cMovieid = quotesDocs[quotePick].movie;
+    
+    for (let index = 0; index < MovieDocs.length; index++) {
+      const element = MovieDocs[index];
+      if(element._id == cMovieid){
+        cMovie = element.name;
+      }
+    }
+  
+    try {
+      let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
+      let data = await response.json();
+      characterData = data;
+    } catch (error) {
+      characterData = require("./api/character.json");
+    }
+    characterDocs = characterData.docs;
+    characterPick = Math.floor(Math.random() * characterDocs.length);
+  
+    characterid = characterDocs[characterPick].id;
+    character = characterDocs[characterPick].name;
+    
+    characterPick = Math.floor(Math.random() * characterDocs.length);
+  
+    characterid = characterDocs[characterPick].id;
+    character2 = characterDocs[characterPick].name;
+  
+    ccharacterid=quotesDocs[quotePick].character;
+    for (let index = 0; index < characterDocs.length; index++) {
+      const element = characterDocs[index];
+      if(element._id == ccharacterid){
+        ccharacter = element.name;
+      }
+    }
+    }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER");
+    
+  
+    let chosenQuote: Question = {
+      text: quote,
+      movie: [cMovie],
+      answers: [ccharacter],
+    };
+    chosenQuote.answers.push(character)
+    chosenQuote.answers.push(character2)
+    chosenQuote.movie.push(Movie)
+    chosenQuote.movie.push(Movie2)
+    
+    chosenQuote.answers=shuffleArray(chosenQuote.answers)
+    chosenQuote.movie=shuffleArray(chosenQuote.movie)
+  res.type("text/html");
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote, score});
+});
 
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
