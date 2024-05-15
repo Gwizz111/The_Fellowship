@@ -409,26 +409,25 @@ app.post("/rounds",async (req, res) => {
       MovieData = require("./api/Movie.json");
     }
     MovieDocs = MovieData.docs;
-    do{
-      MoviePick = Math.floor(Math.random() * MovieDocs.length);
-      Movieid = MovieDocs[MoviePick].id;
-      Movie = MovieDocs[MoviePick].name;
-    } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
-  
-    do{
-      MoviePick = Math.floor(Math.random() * MovieDocs.length);
-      Movieid = MovieDocs[MoviePick].id;
-      Movie2 = MovieDocs[MoviePick].name;
-    } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series");
-    
-    cMovieid = quotesDocs[quotePick].movie;
-    
     for (let index = 0; index < MovieDocs.length; index++) {
       const element = MovieDocs[index];
       if(element._id == cMovieid){
         cMovie = element.name;
       }
     }
+  
+    do{
+      MoviePick = Math.floor(Math.random() * MovieDocs.length);
+      Movieid = MovieDocs[MoviePick].id;
+      Movie = MovieDocs[MoviePick].name;
+    } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series" || Movie===cMovie);
+  
+    do{
+      MoviePick = Math.floor(Math.random() * MovieDocs.length);
+      Movieid = MovieDocs[MoviePick].id;
+      Movie2 = MovieDocs[MoviePick].name;
+    } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series" || Movie2===cMovie || Movie2===Movie);
+  
   
     try {
       let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
