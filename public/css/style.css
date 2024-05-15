@@ -273,6 +273,10 @@ h3 {
     font-size: 1.2rem;
     letter-spacing: 1px;
 }
+#char{
+    padding-top: 5rem;
+    
+}
 
 #Gamemode {
     display: grid;
@@ -417,7 +421,7 @@ h3 {
 /* 10 rondes */
 #answers {
     align-items: center;
-    margin: 7rem;
+    margin: 1.5rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -451,7 +455,7 @@ h3 {
 
 #submit {
     align-items: center;
-    margin: 2rem;
+    margin: 7rem 2rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
@@ -902,6 +906,7 @@ select {
         margin: 0 auto;
         margin-left: 2rem;
         margin-right: 2rem;
+        font-size: medium;
     }
 
     h2 {
