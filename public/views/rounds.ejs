@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="/css/style.css">
     <script type="module" src="/public/js/button.js" defer></script>
     <script>
-        let activeButton = null;
+        let activeButton =null;
         let activeButton2 =null;
+        let activeButtonText =null;
+        let activeButton2Text =null;
 
         function changeColor(buttonId) {
         const buttons = document.querySelectorAll('.btn');
@@ -42,8 +44,11 @@
             document.getElementById(buttonId).classList.remove('btn');
             document.getElementById(buttonId).classList.add('btnactive');
             activeButton = buttonId;
+            activeButtonText = document.getElementById(buttonId).value;
+            document.getElementById("selectedCharacter").value = activeButtonText
         } else {
-            activeButton = null; // Als de knop al actief is, deactiveer deze
+            activeButton =null; // Als de knop al actief is, deactiveer deze
+            activeButton2Text =null;
         }
     }
         function changeColor2(buttonId) {
@@ -75,8 +80,11 @@
                 document.getElementById(buttonId).classList.remove('btn');
                 document.getElementById(buttonId).classList.add('btnactive');
                 activeButton2 = buttonId;
+                activeButton2Text = document.getElementById(buttonId).value;
+                document.getElementById("selectedMovie").value = activeButton2Text
             } else {
                 activeButton2 = null; // Als de knop al actief is, deactiveer deze
+                activeButton2Text =null;
             }
         }
         
@@ -87,33 +95,36 @@
     <%- include("partials/header") %>
     <main>
         <h1 id="qoute"><%= quote %></h1>
-        <section id="answers">
-            <div>
-                <a href="#"><button id="btn1" class="btn" type="button" onclick="changeColor(this.id)"><h3><%= character %></h3></button></a>
-            </div>
-            <div>
-                <a href="#"><button id="btn2" class="btn" type="button" onclick="changeColor(this.id)"><h3><%= character2 %></h3></button></a>
-            </div>
-            <div>
-                <a href="#"><button id="btn3" class="btn" type="button" onclick="changeColor(this.id)"><h3><%= ccharacter %></h3></button></a>
-            </div>
-        </section>
-        <section id="answers">
-            <div>
-                <a href="#"><button id="btnn1" class="btn" type="button" onclick="changeColor2(this.id)"><h3><%= cMovie %></h3></button></a>
-            </div>
-            <div>
-                <a href="#"><button id="btnn2" class="btn" type="button" onclick="changeColor2(this.id)"><h3><%= Movie2 %></h3></button></a>
-            </div>
-            <div>
-                <a href="#"><button id="btnn3" class="btn" type="button" onclick="changeColor2(this.id)"><h3><%= Movie %></h3></button></a>
-            </div>
-        </section><section id="submit">
-            <div>
-                <a href="#"><button class="btn"><h3>versturen</h3></button></a>
-            </div>
-        </section>
-        
+        <form action="/rounds" method="post">
+            <section id="answers">
+                <div>
+                    <button id="btn1" name="btn1" class="btn" type="button" onclick="changeColor(this.id)" value="<%= character %>"><%= character %></button>
+                </div>
+                <div>
+                    <button id="btn2" name="btn2" class="btn" type="button" onclick="changeColor(this.id)" value="<%= character2 %>"><%= character2 %></button>
+                </div>
+                <div>
+                    <button id="btn3" name="btn3" class="btn" type="button" onclick="changeColor(this.id)" value="<%= ccharacter %>"><%= ccharacter %></button>
+                </div>
+            </section>
+            <section id="answers">
+                <div>
+                    <button id="btnn1" name="btnn1" class="btn" type="button" onclick="changeColor2(this.id)" value="<%= cMovie %>"><%= cMovie %></button>
+                </div>
+                <div>
+                    <button id="btnn2" name="btnn2" class="btn" type="button" onclick="changeColor2(this.id)" value="<%= Movie2 %>"><%= Movie2 %></button>
+                </div>
+                <div>
+                    <button id="btnn3" name="btnn3" class="btn" type="button" onclick="changeColor2(this.id)" value="<%= Movie %>"><%= Movie %></button>
+                </div>
+                <input type="hidden" id="selectedMovie" name="selectedMovie" value="" />
+                <input type="hidden" id="selectedCharacter" name="selectedCharacter" value="" />
+            </section>
+            <section id="submit">
+                    <button class="btn">Volgende quote</button>
+            </section>
+        </form>
+        <h3>Score: </h3><h3><%= score %></h3>
     </main>
     <%- include("partials/footer") %>
 </body>

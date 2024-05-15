@@ -28,7 +28,9 @@ app.set("port", 3000);
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.urlencoded({ extended:true}))
+app.use(express.urlencoded({ extended:true}));
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended:true}));
 
 app.get("/", (req, res) => {
   res.type("text/html");
@@ -112,6 +114,8 @@ app.get("/homepage", (req, res) => {
 });
 
 //The One API
+let score: number = 0;
+
 let quotesData: any;
 let quotePick: number = 0;
 let quotesDocs: any;
@@ -220,7 +224,7 @@ app.get("/rounds",async (req, res) => {
   }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER");
 
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,Movie2,character,character2,cMovie,ccharacter});
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,Movie2,character,character2,cMovie,ccharacter,score});
 });
 
 app.get("/suddendeath", (req, res) => {
@@ -238,7 +242,26 @@ app.get("/blacklist", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
 });
 
+app.post("/rounds", (req, res) => {
+  const givenCharacter = req.body.selectedCharacter;
+  const givenMovie = req.body.selectedMovie;
+  const correctCharacter = ccharacter;
+  const correctMovie = cMovie;
 
+
+  if (givenCharacter === correctCharacter && givenMovie === correctMovie) {
+    score = score + 1;
+  }
+  if (
+    (givenCharacter === correctCharacter && givenMovie !== correctMovie) ||
+    (givenCharacter !== correctCharacter && givenMovie === correctMovie)
+  ) {
+    score = score + 0.5;
+  }
+
+  res.type("text/html");
+  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,Movie2,character,character2,cMovie,ccharacter,score});
+});
 
 app.listen(app.get("port"), () =>
   console.log("[server] http://localhost:" + app.get("port"))
