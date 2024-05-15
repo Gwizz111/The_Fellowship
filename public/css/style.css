@@ -274,8 +274,12 @@ h3 {
     letter-spacing: 1px;
 }
 #char{
-    padding-top: 5rem;
+    padding-top: 4rem ;
+    padding-bottom: 0rem;
     
+}
+#score{
+    margin-top: 2rem;
 }
 
 #Gamemode {
@@ -475,7 +479,7 @@ h3 {
 
 #submit {
     align-items: center;
-    margin: 7rem 1rem;
+    margin: 5rem 0.2rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
