@@ -548,6 +548,11 @@ h3 {
     color: rgb(227, 140, 17);
 }
 
+#FavoriteListActive a {
+    text-decoration: none;
+    color: goldenrod
+}
+
 #FavoriteListVerwijder {
     transition: 0.5s;
     cursor: pointer;
