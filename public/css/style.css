@@ -273,6 +273,14 @@ h3 {
     font-size: 1.2rem;
     letter-spacing: 1px;
 }
+#char{
+    padding-top: 4rem ;
+    padding-bottom: 0rem;
+    
+}
+#score{
+    margin-top: 2rem;
+}
 
 #Gamemode {
     display: grid;
@@ -417,7 +425,7 @@ h3 {
 /* 10 rondes */
 #answers {
     align-items: center;
-    margin: 7rem;
+    margin: 1.5rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -428,7 +436,7 @@ h3 {
     text-decoration: none;
 }
 
-#answers button {
+.btn {
     display: block;
     margin: auto;
     text-align: center;
@@ -448,10 +456,30 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+.btnactive{
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-family: Ringbearer;
+    font-weight: 0;
+    font-size: 14px;
+    color: var(--primary-color);
+    background-color: #a39b9bad;
+    padding: 10px 30px;
+    border: solid var(--primary-color) 2px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1460ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
 
 #submit {
     align-items: center;
-    margin: 2rem;
+    margin: 5rem 0.2rem;
     text-align: center;
     display: grid;
     grid-template-columns: 1fr;
@@ -907,6 +935,7 @@ select {
         margin: 0 auto;
         margin-left: 2rem;
         margin-right: 2rem;
+        font-size: medium;
     }
 
     h2 {
