@@ -113,6 +113,12 @@ app.get("/homepage", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
 });
 
+interface Question {
+  text: string;
+  movie: string[];
+  answers: string[];
+}
+
 //The One API
 let score: number = 0;
 
@@ -145,6 +151,19 @@ let characterDocs: any;
 let character: string = "";
 let character2: string = "";
 let characterid: string = "";
+interface Question {
+  text: string;
+  movie: string[];
+  answers: string[];
+}
+const shuffleArray = (array: string[]): any[] => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
 app.get("/rounds",async (req, res) => {
   do{
   try {
@@ -222,6 +241,20 @@ app.get("/rounds",async (req, res) => {
     }
   }
   }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER");
+  
+
+  let chosenQuote: Question = {
+    text: quote,
+    movie: [cMovie],
+    answers: [ccharacter],
+  };
+  chosenQuote.answers.push(character)
+  chosenQuote.answers.push(character2)
+  chosenQuote.movie.push(Movie)
+  chosenQuote.movie.push(Movie2)
+  
+  chosenQuote.answers=shuffleArray(chosenQuote.answers)
+  chosenQuote.movie=shuffleArray(chosenQuote.movie)
 
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {quote,Movie,Movie2,character,character2,cMovie,ccharacter,score});
