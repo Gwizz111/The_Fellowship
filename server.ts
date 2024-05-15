@@ -196,13 +196,13 @@ app.get("/rounds",async (req, res) => {
     MoviePick = Math.floor(Math.random() * MovieDocs.length);
     Movieid = MovieDocs[MoviePick].id;
     Movie = MovieDocs[MoviePick].name;
-  } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series");
+  } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series" || Movie==cMovie);
 
   do{
     MoviePick = Math.floor(Math.random() * MovieDocs.length);
     Movieid = MovieDocs[MoviePick].id;
     Movie2 = MovieDocs[MoviePick].name;
-  } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series");
+  } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series" || Movie2==cMovie || Movie2==Movie);
   
   cMovieid = quotesDocs[quotePick].movie;
   
