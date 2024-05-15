@@ -233,7 +233,7 @@ app.get("/rounds",async (req, res) => {
     .collection("movies")
     .find<Movie>({}).toArray();
   MovieDocs = movies;
-
+  console.log(movies)
   cMovieid = quotesDocs[quotePick].movie;
   
   for (let index = 0; index < MovieDocs.length; index++) {
@@ -303,6 +303,7 @@ app.get("/suddendeath", (req, res) => {
 });
 
 app.get("/favourites", async (req, res) => {
+  console.log(req.session.userId);
   let user = await client
   .db("fellowship")
   .collection("users")
@@ -352,9 +353,7 @@ app.get("/favourites", async (req, res) => {
         if (characterIds[i] == characters[j]._id) {
           charactersName.push(characters[j].name)
         }
-
       }
-
     }
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
@@ -381,17 +380,11 @@ app.post("/rounds",async (req, res) => {
   ) {
     score = score + 0.5;
   }
-
-  do{
-    try {
-      let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
-      let data = await response.json();
-      quotesData = data;
-    } catch (error) {
-      quotesData = require("../The_Fellowship/api/quotes.json");
-    }
-  
-    quotesDocs = quotesData.docs;
+    let quotes = await client
+    .db("fellowship")
+    .collection("quotes")
+    .find<Quote>({}).toArray();
+    quotesDocs = quotes; 
     quotePick = Math.floor(Math.random() * quotesDocs.length);
   
     quoteid = quotesDocs[quotePick].id;
@@ -401,14 +394,11 @@ app.post("/rounds",async (req, res) => {
       quote = '"' + quote + '"';
     }
   
-    try {
-      let response = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
-      let data = await response.json();
-      MovieData = data;
-    } catch (error) {
-      MovieData = require("./api/Movie.json");
-    }
-    MovieDocs = MovieData.docs;
+    let movies = await client
+    .db("fellowship")
+    .collection("movies")
+    .find<Movie>({}).toArray();
+    MovieDocs = movies;
     do{
       MoviePick = Math.floor(Math.random() * MovieDocs.length);
       Movieid = MovieDocs[MoviePick].id;
@@ -430,14 +420,12 @@ app.post("/rounds",async (req, res) => {
       }
     }
   
-    try {
-      let response = await fetch("https://the-one-api.dev/v2/character", { headers, });
-      let data = await response.json();
-      characterData = data;
-    } catch (error) {
-      characterData = require("./api/character.json");
-    }
-    characterDocs = characterData.docs;
+    let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({}).toArray();
+  
+    characterDocs = characters;
     characterPick = Math.floor(Math.random() * characterDocs.length);
   
     characterid = characterDocs[characterPick].id;
@@ -455,7 +443,6 @@ app.post("/rounds",async (req, res) => {
         ccharacter = element.name;
       }
     }
-    }while (ccharacter === "" || ccharacter === "MINOR_CHARACTER");
     
   
     let chosenQuote: Question = {
