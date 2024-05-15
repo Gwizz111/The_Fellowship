@@ -12,21 +12,29 @@
 
 <body>
     <%- include("partials/header") %>
-    <main id="favorieten">
-        <h1>Favorieten</h1>
-        <div id="containerPrint"><i class="fa fa-print"></i></div>
-        <section id="FavoriteList">
-            <a>karakter</a>
-            <a>Quote</a>
-            <a></a>
-        </section>
-        <section id="FavoriteListActive">
-            <a>Gandalf</a>
-            <a>"You shall not pass!"</a>
-            <i class="fa fa-trash-o" id="FavoriteListVerwijder"></i>
-        </section>
-    </main>
-    <%- include("partials/footer") %>
+        <main id="favorieten">
+            <h1>Favorieten</h1>
+            <div id="containerPrint"><i class="fa fa-print"></i></div>
+            <section id="FavoriteList">
+                <a>karakter</a>
+                <a>Quote</a>
+                <a></a>
+            </section>
+            <section id="FavoriteListActive">
+                <% for(let i=0 ; i < quotesDialog.length ;i++) { %>
+                    <a href="https://lotr.fandom.com/wiki/<%=charactersName[i].character %>">
+                        <%=charactersName[i]%>
+                    </a>
+                    <a>
+                        <%=quotesDialog[i]%>
+                            <i class="fa fa-trash-o" id="FavoriteListVerwijder"></i>
+                    </a>
+
+                    <br>
+                    <% } %>
+            </section>
+        </main>
+        <%- include("partials/footer") %>
 </body>
 
 </html>

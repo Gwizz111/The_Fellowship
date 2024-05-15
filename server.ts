@@ -1,7 +1,14 @@
 import express from "express";
 import { randomInt } from "crypto";
 import CryptoJS from "crypto-js";
-import {MongoClient, ObjectId} from "mongodb"
+import {MongoClient, ObjectId, Document, PushOperator, PullOperator} from "mongodb";
+import session from "express-session";
+
+declare module 'express-session' {
+  interface SessionData {
+      userId?: ObjectId;
+  }
+}
 
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
@@ -25,6 +32,13 @@ const headers = {
 
 app.set("view engine", "ejs"); // EJS als view engine
 app.set("port", 3000);
+
+app.use(session({
+  secret: process.env.SESSION_SECRET ?? "secret-code",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1800000 }, // 30 minutes
+}))
 
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({ extended: true }));
@@ -69,7 +83,7 @@ app.post("/login", async (req: any, res: any) => {
     result?.password == encryptedPassword &&
     result?.username == formUsername
   ) {
-    currentUserId = result._id;
+    req.session.userId = result._id;
     res.redirect("/homepage");
   } else {
     res.redirect("/login");
@@ -102,6 +116,7 @@ app.post("/registreer", async (req: any, res: any) => {
     client.db("fellowship")
     .collection("users")
     .insertOne(newUser);
+    req.session.userId = newUser._id
     res.redirect("/homepage")
   }
 });
@@ -165,14 +180,12 @@ const shuffleArray = (array: string[]): any[] => {
   return shuffledArray;
 };
 app.get("/rounds",async (req, res) => {
-  do{
-  try {
-    let response = await fetch("https://the-one-api.dev/v2/quote", { headers, });
-    let data = await response.json();
-    quotesData = data;
-  } catch (error) {
-    quotesData = require("../The_Fellowship/api/quotes.json");
-  }
+  console.log(req.session.userId)
+  let quotes = await client
+    .db("fellowship")
+    .collection("quotes")
+    .find<Quote>({})
+  let quotesResult = await quotes.toArray();
 
   quotesDocs = quotesData.docs;
   quotePick = Math.floor(Math.random() * quotesDocs.length);
@@ -263,9 +276,62 @@ app.get("/suddendeath", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs");
 });
 
-app.get("/favourites", (req, res) => {
+app.get("/favourites", async (req, res) => {
+  let user = await client
+  .db("fellowship")
+  .collection("users")
+  .findOne({_id: new ObjectId(req.session.userId)});
+
+  interface Favorites {
+    _id: ObjectId,
+    userId: ObjectId,
+    quoteId: string[]
+  }
+
+  let favorites : any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .find({userId: user?._id})
+  .toArray();
+
+  let quotesArray = favorites[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  
+  
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+  
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+        
+      }
+      
+    }
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/favourites.ejs");
+  res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
 });
 
 app.get("/blacklist", (req, res) => {
