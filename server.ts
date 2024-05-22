@@ -66,6 +66,8 @@ interface User {
   _id?: ObjectId;
   username: string;
   password: string;
+  highscoreRounds: number;
+  highscoreSuddenDeath: number;
 }
 
 app.post("/login", async (req: any, res: any) => {
@@ -111,7 +113,7 @@ app.post("/registreer", async (req: any, res: any) => {
     let encryptedPassword = CryptoJS.SHA256(formPassword2).toString(
       CryptoJS.enc.Hex
     );
-    let newUser:User = {username: formUsername, password: encryptedPassword} 
+    let newUser:User = {username: formUsername, password: encryptedPassword,highscoreRounds: 0, highscoreSuddenDeath: 0} 
     client.db("fellowship")
     .collection("users")
     .insertOne(newUser);
@@ -175,18 +177,41 @@ const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => 
   }
 
   let hasFavorite: any = await client
-    .db("undefined")
+    .db("fellowship")
     .collection("favorites")
     .findOne({ userId: new ObjectId(userId), quoteId: quoteId });
 
   if (hasFavorite != null || (hasFavorite != undefined && remove == false)) {
     let deleteQuote = await client
-      .db("undefined")
+      .db("fellowship")
       .collection("favorites")
       .updateOne(
         { userId: new ObjectId(userId) },
         { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
       );
+  }
+}
+
+const checkHighscore = async (userId:ObjectId,score: number,gamemode: string) => {
+  let user = await client
+  .db("fellowship")
+  .collection("users")
+  .findOne({_id: new ObjectId(userId)});
+
+  let highscoreRounds = user?.highscoreRounds;
+  let highscoreSuddenDeath = user?.highscoreSuddenDeath;
+
+  if (gamemode == "rounds" && score > highscoreRounds) {
+   let updateHighscoreRounds = await client
+   .db("fellowship")
+   .collection("users")
+   .updateOne({_id: new ObjectId(userId)}, {$set: {highscoreRounds: score}}) 
+  }
+  else if (gamemode == "suddenDeath" && score > highscoreSuddenDeath) {
+    let updateHighscoreSuddenDeath = await client
+   .db("fellowship")
+   .collection("users")
+   .updateOne({_id: new ObjectId(userId)}, {$set: {highscoreSuddenDeath: score}})
   }
 }
 
