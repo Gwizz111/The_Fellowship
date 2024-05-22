@@ -113,11 +113,19 @@ app.post("/registreer", async (req: any, res: any) => {
     let encryptedPassword = CryptoJS.SHA256(formPassword2).toString(
       CryptoJS.enc.Hex
     );
-    let newUser:User = {username: formUsername, password: encryptedPassword,highscoreRounds: 0, highscoreSuddenDeath: 0} 
+    let newUser:User = {username: formUsername, password: encryptedPassword,highscoreRounds: 0, highscoreSuddenDeath: 0};
     client.db("fellowship")
     .collection("users")
     .insertOne(newUser);
     req.session.userId = newUser._id;
+    let newFavorites = {userId: new ObjectId(req.session.userId), quoteId: []};
+    client.db("fellowship")
+    .collection("favorites")
+    .insertOne(newFavorites)
+    let newBlacklists =  {userId: new ObjectId(req.session.userId), quoteId: []};
+    client.db("fellowship")
+    .collection("blacklists")
+    .insertOne(newBlacklists)
     res.redirect("/homepage")
   }
 });
@@ -150,7 +158,6 @@ const favorite = async (userId: ObjectId, quoteId: string, remove: boolean) => {
       { userId: new ObjectId(userId) },
       { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
     );
-    console.log("added")
   }
   else if (remove == true) {
     let deleteQuote = await client
@@ -483,7 +490,6 @@ app.get("/favourites", async (req, res) => {
   .collection("favorites")
   .find({userId: new ObjectId(req.session.userId)})
   .toArray();
-  console.log(favorites);
   let quotesArray = favorites[0].quoteId;
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
@@ -518,7 +524,7 @@ app.get("/favourites", async (req, res) => {
         }
       }
     }
-    
+    console.log(charactersName)
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
 });
@@ -539,9 +545,9 @@ app.get("/blacklist", async (req, res) => {
   .db("fellowship")
   .collection("blacklists")
   .find({userId: user?._id})
+  .toArray();
   console.log(blacklists)
-  /*
-  let quotesArray = favorites[0].quoteId;
+  let quotesArray = blacklists[0].quoteId;
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
   let charactersName : string[] = [];
@@ -575,9 +581,8 @@ app.get("/blacklist", async (req, res) => {
         }
       }
     }
-    */
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
+  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs", {quotesDialog, charactersName});
 });
 
 app.get("/gameover", (req, res) => {
