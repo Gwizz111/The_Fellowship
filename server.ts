@@ -505,6 +505,11 @@ app.get("/blacklist", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
 });
 
+app.get("/gameover", (req, res) => {
+  res.type("text/html");
+  res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
+});
+
 app.post("/rounds",async (req, res) => {
   if(counter10<10){
     counter10++;
@@ -603,7 +608,7 @@ app.post("/rounds",async (req, res) => {
     res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote, score});
   }else{
     res.type("text/html");
-    res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
+    res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
   }
   
 });
@@ -705,8 +710,8 @@ app.post("/suddendeath",async (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs", {chosenQuote, score});
 }
 else{
-  res.type("text/html")
-  res.render("/workspaces/The_Fellowship/public/views/homepage.ejs")
+  res.type("text/html");
+  res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
 }
 });
 
