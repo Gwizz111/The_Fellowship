@@ -67,7 +67,6 @@ interface User {
   username: string;
   password: string;
 }
-let currentUserId:any;
 
 app.post("/login", async (req: any, res: any) => {
   const formUsername = req.body.username;
@@ -128,6 +127,69 @@ app.get("/homepage", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
 });
 
+const favorite = async (userId: ObjectId, quoteId: string, remove: boolean) => {
+  let user:any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .findOne({userId: userId});
+
+  if (user == null) {
+    let newUser = await client
+    .db("fellowship")
+    .collection("favorites")
+    .insertOne({userId: userId, quoteId: []}) 
+  }
+
+  if (remove == false) {
+    let addQuote = await client
+    .db("fellowship")
+    .collection("favorites")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
+    );
+    console.log("added")
+  }
+  else if (remove == true) {
+    let deleteQuote = await client
+    .db("fellowship")
+    .collection("favorites")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+    )
+  }
+};
+
+const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => {
+  let user:any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .findOne({userId: userId});
+
+  if (user == null) {
+    let newUser = await client
+    .db("fellowship")
+    .collection("blacklists")
+    .insertOne({userId: userId, quoteId: []}) 
+  }
+
+  let hasFavorite: any = await client
+    .db("undefined")
+    .collection("favorites")
+    .findOne({ userId: new ObjectId(userId), quoteId: quoteId });
+
+  if (hasFavorite != null || (hasFavorite != undefined && remove == false)) {
+    let deleteQuote = await client
+      .db("undefined")
+      .collection("favorites")
+      .updateOne(
+        { userId: new ObjectId(userId) },
+        { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+      );
+  }
+}
+
 interface Question {
   text: string;
   movie: string[];
@@ -169,6 +231,7 @@ interface Character {
 
 //The One API
 let score: number = 0;
+let counter10: number = 0;
 
 let quotesData: any;
 let quotePick: number = 0;
@@ -213,7 +276,8 @@ const shuffleArray = (array: string[]): any[] => {
   return shuffledArray;
 };
 app.get("/rounds",async (req, res) => {
-
+  counter10 = 1;
+  score = 0;
   let quotes = await client
     .db("fellowship")
     .collection("quotes")
@@ -381,7 +445,6 @@ app.get("/suddendeath", async(req, res) => {
 });
 
 app.get("/favourites", async (req, res) => {
-  console.log(req.session.userId);
   let user = await client
   .db("fellowship")
   .collection("users")
@@ -398,7 +461,7 @@ app.get("/favourites", async (req, res) => {
   .collection("favorites")
   .find({userId: user?._id})
   .toArray();
-
+  console.log(favorites);
   let quotesArray = favorites[0].quoteId;
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
@@ -443,99 +506,106 @@ app.get("/blacklist", (req, res) => {
 });
 
 app.post("/rounds",async (req, res) => {
-  const givenCharacter = req.body.selectedCharacter;
-  const givenMovie = req.body.selectedMovie;
-  const correctCharacter = ccharacter;
-  const correctMovie = cMovie;
+  if(counter10<10){
+    counter10++;
+    const givenCharacter = req.body.selectedCharacter;
+    const givenMovie = req.body.selectedMovie;
+    const correctCharacter = ccharacter;
+    const correctMovie = cMovie;
 
 
-  if (givenCharacter === correctCharacter && givenMovie === correctMovie) {
-    score = score + 1;
-  }
-  if (
-    (givenCharacter === correctCharacter && givenMovie !== correctMovie) ||
-    (givenCharacter !== correctCharacter && givenMovie === correctMovie)
-  ) {
-    score = score + 0.5;
-  }
-    let quotes = await client
-    .db("fellowship")
-    .collection("quotes")
-    .find<Quote>({}).toArray();
-    quotesDocs = quotes; 
-    quotePick = Math.floor(Math.random() * quotesDocs.length);
-  
-    quoteid = quotesDocs[quotePick].id;
-    quote = quotesDocs[quotePick].dialog;
-  
-    if (!quote.includes('"')) {
-      quote = '"' + quote + '"';
+    if (givenCharacter === correctCharacter && givenMovie === correctMovie) {
+      score = score + 1;
     }
-  
-    let movies = await client
-    .db("fellowship")
-    .collection("movies")
-    .find<Movie>({}).toArray();
-    MovieDocs = movies;
-    for (let index = 0; index < MovieDocs.length; index++) {
-      const element = MovieDocs[index];
-      if(element._id == cMovieid){
-        cMovie = element.name;
+    if (
+      (givenCharacter === correctCharacter && givenMovie !== correctMovie) ||
+      (givenCharacter !== correctCharacter && givenMovie === correctMovie)
+    ) {
+      score = score + 0.5;
+    }
+      let quotes = await client
+      .db("fellowship")
+      .collection("quotes")
+      .find<Quote>({}).toArray();
+      quotesDocs = quotes; 
+      quotePick = Math.floor(Math.random() * quotesDocs.length);
+    
+      quoteid = quotesDocs[quotePick].id;
+      quote = quotesDocs[quotePick].dialog;
+    
+      if (!quote.includes('"')) {
+        quote = '"' + quote + '"';
       }
-    }
-  
-    do{
-      MoviePick = Math.floor(Math.random() * MovieDocs.length);
-      Movieid = MovieDocs[MoviePick].id;
-      Movie = MovieDocs[MoviePick].name;
-    } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series" || Movie===cMovie);
-  
-    do{
-      MoviePick = Math.floor(Math.random() * MovieDocs.length);
-      Movieid = MovieDocs[MoviePick].id;
-      Movie2 = MovieDocs[MoviePick].name;
-    } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series" || Movie2===cMovie || Movie2===Movie);
-  
-  
-    let characters = await client
-    .db("fellowship")
-    .collection("characters")
-    .find<Character>({}).toArray();
-  
-    characterDocs = characters;
-    characterPick = Math.floor(Math.random() * characterDocs.length);
-  
-    characterid = characterDocs[characterPick].id;
-    character = characterDocs[characterPick].name;
     
-    characterPick = Math.floor(Math.random() * characterDocs.length);
-  
-    characterid = characterDocs[characterPick].id;
-    character2 = characterDocs[characterPick].name;
-  
-    ccharacterid=quotesDocs[quotePick].character;
-    for (let index = 0; index < characterDocs.length; index++) {
-      const element = characterDocs[index];
-      if(element._id == ccharacterid){
-        ccharacter = element.name;
+      let movies = await client
+      .db("fellowship")
+      .collection("movies")
+      .find<Movie>({}).toArray();
+      MovieDocs = movies;
+      for (let index = 0; index < MovieDocs.length; index++) {
+        const element = MovieDocs[index];
+        if(element._id == cMovieid){
+          cMovie = element.name;
+        }
       }
-    }
     
+      do{
+        MoviePick = Math.floor(Math.random() * MovieDocs.length);
+        Movieid = MovieDocs[MoviePick].id;
+        Movie = MovieDocs[MoviePick].name;
+      } while(Movie=="The Lord of the Rings Series" || Movie=="The Hobbit Series" || Movie===cMovie);
+    
+      do{
+        MoviePick = Math.floor(Math.random() * MovieDocs.length);
+        Movieid = MovieDocs[MoviePick].id;
+        Movie2 = MovieDocs[MoviePick].name;
+      } while(Movie2=="The Lord of the Rings Series" || Movie2=="The Hobbit Series" || Movie2===cMovie || Movie2===Movie);
+    
+    
+      let characters = await client
+      .db("fellowship")
+      .collection("characters")
+      .find<Character>({}).toArray();
+    
+      characterDocs = characters;
+      characterPick = Math.floor(Math.random() * characterDocs.length);
+    
+      characterid = characterDocs[characterPick].id;
+      character = characterDocs[characterPick].name;
+      
+      characterPick = Math.floor(Math.random() * characterDocs.length);
+    
+      characterid = characterDocs[characterPick].id;
+      character2 = characterDocs[characterPick].name;
+    
+      ccharacterid=quotesDocs[quotePick].character;
+      for (let index = 0; index < characterDocs.length; index++) {
+        const element = characterDocs[index];
+        if(element._id == ccharacterid){
+          ccharacter = element.name;
+        }
+      }
+      
+    
+      let chosenQuote: Question = {
+        text: quote,
+        movie: [cMovie],
+        answers: [ccharacter],
+      };
+      chosenQuote.answers.push(character)
+      chosenQuote.answers.push(character2)
+      chosenQuote.movie.push(Movie)
+      chosenQuote.movie.push(Movie2)
+      
+      chosenQuote.answers=shuffleArray(chosenQuote.answers)
+      chosenQuote.movie=shuffleArray(chosenQuote.movie)
+    res.type("text/html");
+    res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote, score});
+  }else{
+    res.type("text/html");
+    res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
+  }
   
-    let chosenQuote: Question = {
-      text: quote,
-      movie: [cMovie],
-      answers: [ccharacter],
-    };
-    chosenQuote.answers.push(character)
-    chosenQuote.answers.push(character2)
-    chosenQuote.movie.push(Movie)
-    chosenQuote.movie.push(Movie2)
-    
-    chosenQuote.answers=shuffleArray(chosenQuote.answers)
-    chosenQuote.movie=shuffleArray(chosenQuote.movie)
-  res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote, score});
 });
 
 app.post("/suddendeath",async (req, res) => {
