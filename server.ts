@@ -114,11 +114,19 @@ app.post("/registreer", async (req: any, res: any) => {
     let encryptedPassword = CryptoJS.SHA256(formPassword2).toString(
       CryptoJS.enc.Hex
     );
-    let newUser:User = {username: formUsername, password: encryptedPassword,highscoreRounds: 0, highscoreSuddenDeath: 0} 
+    let newUser:User = {username: formUsername, password: encryptedPassword,highscoreRounds: 0, highscoreSuddenDeath: 0};
     client.db("fellowship")
     .collection("users")
     .insertOne(newUser);
     req.session.userId = newUser._id;
+    let newFavorites = {userId: new ObjectId(req.session.userId), quoteId: []};
+    client.db("fellowship")
+    .collection("favorites")
+    .insertOne(newFavorites)
+    let newBlacklists =  {userId: new ObjectId(req.session.userId), quoteId: []};
+    client.db("fellowship")
+    .collection("blacklists")
+    .insertOne(newBlacklists)
     res.redirect("/homepage")
   }
 });
@@ -160,7 +168,6 @@ const favorite = async (userId: ObjectId, quoteId: string, remove: boolean) => {
       { userId: new ObjectId(userId) },
       { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
     );
-    console.log("added")
   }
   else if (remove == true) {
     let deleteQuote = await client
@@ -502,12 +509,9 @@ app.get("/suddendeath", async(req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs",{chosenQuote,score});
 });
 
-app.get("/favourites", async (req, res) => {
-  let user = await client
-  .db("fellowship")
-  .collection("users")
-  .findOne({_id: new ObjectId(req.session.userId)});
 
+app.get("/favourites", async (req, res) => {
+ 
   interface Favorites {
     _id: ObjectId,
     userId: ObjectId,
@@ -517,9 +521,8 @@ app.get("/favourites", async (req, res) => {
   let favorites : any = await client
   .db("fellowship")
   .collection("favorites")
-  .find({userId: user?._id})
+  .find({userId: new ObjectId(req.session.userId)})
   .toArray();
-  console.log(favorites);
   let quotesArray = favorites[0].quoteId;
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
@@ -558,9 +561,59 @@ app.get("/favourites", async (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
 });
 
-app.get("/blacklist", (req, res) => {
+app.get("/blacklist", async (req, res) => {
+  let user = await client
+  .db("fellowship")
+  .collection("users")
+  .findOne({_id: new ObjectId(req.session.userId)});
+
+  interface Blacklists {
+    _id: ObjectId,
+    userId: ObjectId,
+    quoteId: string[]
+  }
+
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: user?._id})
+  .toArray();
+  let quotesArray = blacklists[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
+  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs", {quotesDialog, charactersName});
 });
 
 app.get("/gameover", (req, res) => {

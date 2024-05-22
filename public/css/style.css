@@ -276,9 +276,10 @@ h3 {
 #char{
     padding-top: 1rem ;
     padding-bottom: 0rem;
-    
+
 }
-#score{
+
+#score {
     margin-top: 2rem;
 }
 
@@ -670,21 +671,25 @@ h3 {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
+
 /* GameOver */
-#gameOver{
+#gameOver {
     display: block;
     margin: auto;
     padding: 9%;
 }
-#gameOverImg{
+
+#gameOverImg {
     width: 15%;
     display: block;
     margin: auto;
     margin-bottom: 2rem;
 }
-#gameOver a{
+
+#gameOver a {
     text-decoration: none;
 }
+
 #btnGameOver {
     display: block;
     margin: auto;
@@ -707,7 +712,8 @@ h3 {
     text-decoration: none;
     margin-top: 2rem;
 }
-#btnGameOver:hover{
+
+#btnGameOver:hover {
     display: block;
     margin: auto;
     text-align: center;
@@ -729,6 +735,7 @@ h3 {
     text-decoration: none;
     margin-top: 2rem;
 }
+
 /* Blacklist */
 #containerPrint {
     text-align: right;
@@ -760,6 +767,11 @@ h3 {
 #BlacklistListActive i:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
+}
+
+#BlacklistListActive a {
+    text-decoration: none;
+    color: goldenrod
 }
 
 #BlacklistList {
