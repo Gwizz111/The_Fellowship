@@ -524,7 +524,6 @@ app.get("/favourites", async (req, res) => {
         }
       }
     }
-    console.log(charactersName)
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
 });
@@ -546,7 +545,6 @@ app.get("/blacklist", async (req, res) => {
   .collection("blacklists")
   .find({userId: user?._id})
   .toArray();
-  console.log(blacklists)
   let quotesArray = blacklists[0].quoteId;
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
