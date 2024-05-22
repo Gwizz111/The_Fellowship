@@ -93,6 +93,16 @@
     <%- include("partials/header") %>
     <main>
         <h1 id="qoute"><%= chosenQuote.text %></h1>
+        <form id="favouriteGame" action="/favouriteQuote" method="post">
+            <section id="submit">
+                <i class="fa fa-heart-o" id="heart"></i>
+            </section>
+        </form>
+        <form id="blacklistGame" action="/blacklistQuote" method="post">
+            <section id="submit">
+                <i class="fa fa-close" id="x"></i>
+            </section>
+        </form>
         <h2 id="char">character</h2>
         <form action="/suddendeath" method="post">
             <section id="answers">

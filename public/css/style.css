@@ -274,7 +274,7 @@ h3 {
     letter-spacing: 1px;
 }
 #char{
-    padding-top: 4rem ;
+    padding-top: 1rem ;
     padding-bottom: 0rem;
     
 }
@@ -423,6 +423,35 @@ h3 {
 }
 
 /* 10 rondes */
+#favouriteGame{
+    margin: auto;
+    margin-top: -2rem;
+    margin-bottom: -2rem;
+    margin-left: 47%;
+    display: inline-block;
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--primary-color);
+}
+#blacklistGame{
+    margin: auto;
+    margin-top: -2rem;
+    margin-bottom: -2rem;
+    display: inline-block;
+    text-align: center;
+    font-size: 2.4rem;
+    color: var(--primary-color);
+}
+#favouriteGame i:hover{
+    cursor: pointer;
+    color:rgb(255, 166, 0)enrod;
+    transition: 0.5s;
+}
+#blacklistGame i:hover{
+    cursor: pointer;
+    color:rgb(255, 166, 0)enrod;
+    transition: 0.5s;
+}
 #answers {
     align-items: center;
     margin: 1rem;
@@ -435,7 +464,15 @@ h3 {
 #answers a {
     text-decoration: none;
 }
-
+#formBtn{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 .btn {
     display: block;
     margin: auto;
@@ -476,6 +513,47 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
+#submitBtn:hover{
+    
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-family: Ringbearer;
+    font-weight: 0;
+    font-size: 14px;
+    color: var(--primary-color);
+    background-color: #a39b9bad;
+    padding: 10px 30px;
+    border: solid var(--primary-color) 2px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1460ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
+.btn:hover{
+    display: block;
+    margin: auto;
+    text-align: center;
+    font-family: Ringbearer;
+    font-weight: 0;
+    font-size: 14px;
+    color: var(--primary-color);
+    background-color: #a39b9bad;
+    padding: 10px 30px;
+    border: solid var(--primary-color) 2px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1460ms;
+    transform: translateY(0);
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+}
 
 #submit {
     align-items: center;
@@ -490,7 +568,7 @@ h3 {
     text-decoration: none;
 }
 
-#submit button {
+#submitBtn {
     display: block;
     margin: auto;
     text-align: center;

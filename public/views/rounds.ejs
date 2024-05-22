@@ -95,6 +95,16 @@
     <%- include("partials/header") %>
     <main>
         <h1 id="qoute"><%= chosenQuote.text %></h1>
+        <form id="favouriteGame" action="/favouriteQuote" method="post">
+            <section id="submit">
+                <button id="formBtn"><i class="fa fa-heart-o" id="heart"></i></button>
+            </section>
+        </form>
+        <form id="blacklistGame" action="/blacklistQuote" method="post">
+            <section id="submit">
+                <button id="formBtn"><i class="fa fa-close" id="x"></i></button>
+            </section>
+        </form>
         <h2 id="char">character</h2>
         <form action="/rounds" method="post">
             <section id="answers">
@@ -123,7 +133,7 @@
                 <input type="hidden" id="selectedCharacter" name="selectedCharacter" value="" />
             </section>
             <section id="submit">
-                    <button class="btn">Volgende quote</button>
+                    <button id="submitBtn" class="btn">Volgende quote</button>
             </section>
         </form>
         <h3 id="score">Score: <%= score %></h3>

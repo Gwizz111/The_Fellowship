@@ -7,6 +7,7 @@ import session from "express-session";
 declare module 'express-session' {
   interface SessionData {
       userId?: ObjectId;
+      quoteId?: string;
   }
 }
 
@@ -124,11 +125,20 @@ app.post("/registreer", async (req: any, res: any) => {
 
 
 
-app.get("/homepage", (req, res) => {
+app.get("/homepage", async (req, res) => {
+  let userHighscores = await client.db("fellowship").collection("users").findOne({_id: new ObjectId(req.session.userId)})
+  let highscoreRounds = userHighscores?.highscoreRounds;
+  let highscoreSuddenDeath = userHighscores?.highscoreSuddenDeath;
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
+  res.render("/workspaces/The_Fellowship/public/views/homepage.ejs", { highscoreRounds, highscoreSuddenDeath});
 });
 
+app.post("/favouriteQuote", async (req, res) =>{
+  favorite(req.session.userId as ObjectId, req.session.quoteId as string, false);
+})
+app.post("/blacklistQuote", async (req, res) =>{
+  blacklist(req.session.userId as ObjectId, req.session.quoteId as string, false);
+})
 const favorite = async (userId: ObjectId, quoteId: string, remove: boolean) => {
   let user:any = await client
   .db("fellowship")
@@ -189,6 +199,25 @@ const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => 
         { userId: new ObjectId(userId) },
         { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
       );
+  }
+  if (remove == false) {
+    let addQuote = await client
+    .db("fellowship")
+    .collection("blacklists")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
+    );
+    console.log("added")
+  }
+  else if (remove == true) {
+    let deleteQuote = await client
+    .db("fellowship")
+    .collection("blacklists")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+    )
   }
 }
 
@@ -311,6 +340,7 @@ app.get("/rounds",async (req, res) => {
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
   quoteid = quotesDocs[quotePick].id;
+  req.session.quoteId = quoteid;
   quote = quotesDocs[quotePick].dialog;
 
   if (!quote.includes('"')) {
@@ -373,6 +403,7 @@ app.get("/rounds",async (req, res) => {
     movie: [cMovie],
     answers: [ccharacter],
   };
+  console.log(chosenQuote);
   chosenQuote.answers.push(character)
   chosenQuote.answers.push(character2)
   chosenQuote.movie.push(Movie)
@@ -386,6 +417,7 @@ app.get("/rounds",async (req, res) => {
 });
 
 app.get("/suddendeath", async(req, res) => {
+  score=0;
   let quotes = await client
     .db("fellowship")
     .collection("quotes")
@@ -394,6 +426,7 @@ app.get("/suddendeath", async(req, res) => {
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
   quoteid = quotesDocs[quotePick].id;
+  req.session.quoteId = quoteid;
   quote = quotesDocs[quotePick].dialog;
 
   if (!quote.includes('"')) {
@@ -632,6 +665,7 @@ app.post("/rounds",async (req, res) => {
     res.type("text/html");
     res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote, score});
   }else{
+      checkHighscore(req.session.userId as ObjectId, score, "rounds");
     res.type("text/html");
     res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
   }
@@ -735,6 +769,7 @@ app.post("/suddendeath",async (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs", {chosenQuote, score});
 }
 else{
+  checkHighscore(req.session.userId as ObjectId, score, "suddenDeath");
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
 }
