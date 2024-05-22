@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>The LOTR quiz - Home</title>
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <%- include("partials/header") %>
+        <main>
+            <section id="gameOver">
+                <img src="/assets/images/ring.png" id="gameOverImg" alt="10 Rondes">
+                <h1>Je hebt een score van: <%= score %>.</h1>
+                <a href="../homepage"><button id="btnGameOver">Homepagina</button></a>
+            </section>
+        </main>
+        <%- include("partials/footer") %>
+    </body>
+</html>
