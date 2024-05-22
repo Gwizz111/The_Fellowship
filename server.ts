@@ -67,7 +67,6 @@ interface User {
   username: string;
   password: string;
 }
-let currentUserId:any;
 
 app.post("/login", async (req: any, res: any) => {
   const formUsername = req.body.username;
@@ -302,7 +301,6 @@ app.get("/suddendeath", (req, res) => {
 });
 
 app.get("/favourites", async (req, res) => {
-  console.log(req.session.userId);
   let user = await client
   .db("fellowship")
   .collection("users")
@@ -319,7 +317,7 @@ app.get("/favourites", async (req, res) => {
   .collection("favorites")
   .find({userId: user?._id})
   .toArray();
-
+  console.log(favorites);
   let quotesArray = favorites[0].quoteId;
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
