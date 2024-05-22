@@ -127,6 +127,69 @@ app.get("/homepage", (req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
 });
 
+const favorite = async (userId: ObjectId, quoteId: string, remove: boolean) => {
+  let user:any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .findOne({userId: userId});
+
+  if (user == null) {
+    let newUser = await client
+    .db("fellowship")
+    .collection("favorites")
+    .insertOne({userId: userId, quoteId: []}) 
+  }
+
+  if (remove == false) {
+    let addQuote = await client
+    .db("fellowship")
+    .collection("favorites")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
+    );
+    console.log("added")
+  }
+  else if (remove == true) {
+    let deleteQuote = await client
+    .db("fellowship")
+    .collection("favorites")
+    .updateOne(
+      { userId: new ObjectId(userId) },
+      { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+    )
+  }
+};
+
+const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => {
+  let user:any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .findOne({userId: userId});
+
+  if (user == null) {
+    let newUser = await client
+    .db("fellowship")
+    .collection("blacklists")
+    .insertOne({userId: userId, quoteId: []}) 
+  }
+
+  let hasFavorite: any = await client
+    .db("undefined")
+    .collection("favorites")
+    .findOne({ userId: new ObjectId(userId), quoteId: quoteId });
+
+  if (hasFavorite != null || (hasFavorite != undefined && remove == false)) {
+    let deleteQuote = await client
+      .db("undefined")
+      .collection("favorites")
+      .updateOne(
+        { userId: new ObjectId(userId) },
+        { $pull: { quoteId: quoteId } as unknown as PullOperator<Document> }
+      );
+  }
+}
+
 interface Question {
   text: string;
   movie: string[];
