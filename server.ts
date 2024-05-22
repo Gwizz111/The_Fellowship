@@ -124,7 +124,7 @@ app.post("/registreer", async (req: any, res: any) => {
 
 
 
-app.get("/homepage", (req, res) => {
+app.get("/homepage", async (req, res) => {
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/homepage.ejs");
 });
@@ -469,12 +469,9 @@ app.get("/suddendeath", async(req, res) => {
   res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs",{chosenQuote,score});
 });
 
-app.get("/favourites", async (req, res) => {
-  let user = await client
-  .db("fellowship")
-  .collection("users")
-  .findOne({_id: new ObjectId(req.session.userId)});
 
+app.get("/favourites", async (req, res) => {
+ 
   interface Favorites {
     _id: ObjectId,
     userId: ObjectId,
@@ -484,7 +481,7 @@ app.get("/favourites", async (req, res) => {
   let favorites : any = await client
   .db("fellowship")
   .collection("favorites")
-  .find({userId: user?._id})
+  .find({userId: new ObjectId(req.session.userId)})
   .toArray();
   console.log(favorites);
   let quotesArray = favorites[0].quoteId;
@@ -521,11 +518,64 @@ app.get("/favourites", async (req, res) => {
         }
       }
     }
+    
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
 });
 
-app.get("/blacklist", (req, res) => {
+app.get("/blacklist", async (req, res) => {
+  let user = await client
+  .db("fellowship")
+  .collection("users")
+  .findOne({_id: new ObjectId(req.session.userId)});
+
+  interface Blacklists {
+    _id: ObjectId,
+    userId: ObjectId,
+    quoteId: string[]
+  }
+
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: user?._id})
+  console.log(blacklists)
+  /*
+  let quotesArray = favorites[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+    */
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs");
 });
