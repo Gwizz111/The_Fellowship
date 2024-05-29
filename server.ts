@@ -50,7 +50,7 @@ app.use(express.urlencoded({ extended:true}));
 
 app.get("/", (req, res) => {
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/index.ejs");
+  res.render("../public/views/index.ejs");
 });
 
 app.get("/login", (req: any, res: any) => {
