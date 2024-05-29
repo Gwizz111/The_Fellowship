@@ -59,7 +59,7 @@ app.get("/login", (req: any, res: any) => {
     failed = true;
   }
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/login.ejs", {
+  res.render("../public/views/login.ejs", {
     failed: failed,
   });
 });
@@ -95,7 +95,7 @@ app.post("/login", async (req: any, res: any) => {
 
 app.get("/registreer", (req, res) => {
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/registreer.ejs");
+  res.render("../public/views/registreer.ejs");
 });
 
 app.post("/registreer", async (req: any, res: any) => {
@@ -158,7 +158,7 @@ app.get("/homepage", async (req, res) => {
   let highscoreRounds = userHighscores?.highscoreRounds;
   let highscoreSuddenDeath = userHighscores?.highscoreSuddenDeath;
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/homepage.ejs", { highscoreRounds, highscoreSuddenDeath});
+  res.render("../public/views/homepage.ejs", { highscoreRounds, highscoreSuddenDeath});
 });
 
 app.post("/favouriteQuote", async (req, res) =>{
@@ -240,7 +240,7 @@ app.post("/blacklistChar", async (req, res) =>{
 
   console.log(quoteDialogAndCharacter)
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs", {quoteDialogAndCharacter});
+  res.render("../public/views/blacklist.ejs", {quoteDialogAndCharacter});
 });
 
 app.post("/favouriteChar", async (req, res) =>{
@@ -305,7 +305,7 @@ app.post("/favouriteChar", async (req, res) =>{
       }
     }
     res.type("text/html");
-    res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
+    res.render("../public/views/favourites.ejs", {quoteDialogAndCharacter});
 })
 app.post("/blacklistDelete", async (req, res) =>{
   const id = req.body.quoteId;
@@ -602,7 +602,7 @@ app.get("/rounds",async (req, res) => {
   chosenQuote.movie=shuffleArray(chosenQuote.movie)
 
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote,score});
+  res.render("../public/views/rounds.ejs", {chosenQuote,score});
 });
 
 app.get("/suddendeath", async(req, res) => {
@@ -701,7 +701,7 @@ app.get("/suddendeath", async(req, res) => {
 
   
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs",{chosenQuote,score});
+  res.render("../public/views/suddendeath.ejs",{chosenQuote,score});
 });
 
 
@@ -759,7 +759,7 @@ app.get("/favourites", async (req, res) => {
     quoteDialogAndCharacter.push(dialogAndCharacter)
     }
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
+  res.render("../public/views/favourites.ejs", {quoteDialogAndCharacter});
 });
 
 app.get("/blacklist", async (req, res) => {
@@ -823,12 +823,12 @@ app.get("/blacklist", async (req, res) => {
   }
   console.log(quoteDialogAndCharacter)
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs", {quoteDialogAndCharacter});
+  res.render("../public/views/blacklist.ejs", {quoteDialogAndCharacter});
 });
 
 app.get("/gameover", (req, res) => {
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
+  res.render("../public/views/gameOver.ejs", {score})
 });
 
 app.post("/rounds",async (req, res) => {
@@ -926,11 +926,11 @@ app.post("/rounds",async (req, res) => {
       chosenQuote.answers=shuffleArray(chosenQuote.answers)
       chosenQuote.movie=shuffleArray(chosenQuote.movie)
     res.type("text/html");
-    res.render("/workspaces/The_Fellowship/public/views/rounds.ejs", {chosenQuote, score});
+    res.render("../public/views/rounds.ejs", {chosenQuote, score});
   }else{
       checkHighscore(req.session.userId as ObjectId, score, "rounds");
     res.type("text/html");
-    res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
+    res.render("../public/views/gameOver.ejs", {score})
   }
   
 });
@@ -1029,12 +1029,12 @@ app.post("/suddendeath",async (req, res) => {
     chosenQuote.answers=shuffleArray(chosenQuote.answers)
     chosenQuote.movie=shuffleArray(chosenQuote.movie)
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/suddendeath.ejs", {chosenQuote, score});
+  res.render("../public/views/suddendeath.ejs", {chosenQuote, score});
 }
 else{
   checkHighscore(req.session.userId as ObjectId, score, "suddenDeath");
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/gameOver.ejs", {score})
+  res.render("../public/views/gameOver.ejs", {score})
 }
 });
 
