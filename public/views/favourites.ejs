@@ -21,12 +21,13 @@
                 <a></a>
             </section>
             <section id="FavoriteListActive">
-                <% for(let i=0 ; i < quotesDialog.length ;i++) { %>
-                    <a href="https://lotr.fandom.com/wiki/<%=charactersName[i] %>">
-                        <%=charactersName[i]%>
+                <% for(let i=0 ; i < quoteDialogAndCharacter.length ;i++) { %>
+                    <a>
+                        <%=quoteDialogAndCharacter[i].quoteDialog%>
                     </a>
                     <a>
-                        <%=quotesDialog[i]%>
+                        <%=quoteDialogAndCharacter[i].characterName%>
+                            <i class="fa fa-trash-o" id="FavoriteListVerwijder"></i>
                     </a>
                     <form id="favouriteDelete" action="/favouriteDelete" method="post">
                         <input
