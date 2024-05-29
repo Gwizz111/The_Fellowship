@@ -424,9 +424,9 @@ h3 {
 
 /* 10 rondes */
 #favouriteGame{
-    margin: auto;
-    margin-top: -2rem;
-    margin-bottom: -2rem;
+    
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     margin-left: 47%;
     display: inline-block;
     text-align: center;
@@ -434,9 +434,9 @@ h3 {
     color: var(--primary-color);
 }
 #blacklistGame{
-    margin: auto;
-    margin-top: -2rem;
-    margin-bottom: -2rem;
+    
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: inline-block;
     text-align: center;
     font-size: 2.4rem;
@@ -476,7 +476,7 @@ h3 {
 }
 .btn {
     display: block;
-    margin: auto;
+    margin: 1.2rem auto;
     text-align: center;
     font-family: Ringbearer;
     font-weight: 0;
@@ -628,6 +628,19 @@ h3 {
     border-bottom: solid var(--primary-color) 1.5px;
 }
 
+#favouriteDelete{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+#blacklistDelete{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+
 #FavoriteListActive {
     font-family: Ringbearer;
     color: var(--primary-color);
@@ -648,7 +661,6 @@ h3 {
     transition: 1s;
     cursor: pointer;
     font-size: 1.8rem;
-    border-bottom: solid var(--primary-color) 1.5px;
 }
 
 #FavoriteListActive i:hover {
@@ -664,8 +676,8 @@ h3 {
 #FavoriteListVerwijder {
     transition: 0.5s;
     cursor: pointer;
+    border-bottom: none;
 }
-
 #FavoriteListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
@@ -760,7 +772,6 @@ h3 {
     transition: 1s;
     cursor: pointer;
     font-size: 1.8rem;
-    border-bottom: solid var(--primary-color) 1.5px;
 }
 
 #BlacklistListActive i:hover {
@@ -1090,11 +1101,11 @@ select {
     h2 {
         max-width: 40%;
         text-align: center;
-        margin-left: 55px;
+        margin: auto;
     }
 
     #answers {
-        padding: 5rem;
+        padding: 1rem 5rem;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -1141,5 +1152,19 @@ select {
     #Lists p {
         margin-left: 12%;
         margin-top: 1rem;
+        margin-bottom: 5rem;
+    }
+    #score{
+        margin-bottom: 5rem;
+    }
+    #favouriteGame{
+        margin-left: 40%;
+    }
+    #blacklistGame{
+        margin: auto;
+    }
+    .btn{
+        margin: auto;
+        margin-bottom: 1rem;
     }
 }

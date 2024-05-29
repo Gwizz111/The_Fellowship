@@ -27,17 +27,18 @@
                     </a>
                     <a>
                         <%=quoteDialogAndCharacter[i].quoteDialog%>
-                            <i class="fa fa-trash-o" id="FavoriteListVerwijder"></i>
                     </a>
                     <form id="favouriteDelete" action="/favouriteDelete" method="post">
-                        <input type="hidden" name="quoteId" id="quoteId"
-                            value="<%=quoteDialogAndCharacter[i].quoteDialog%>" />
                         <section id="submit">
+                            <input
+                                type="hidden"
+                                name="quoteId"
+                                id="quoteId"
+                                value="<%=quoteDialogAndCharacter[i].quoteId%>"
+                            />
                             <button id="formBtn"><i class="fa fa-trash-o" id="FavoriteListVerwijder"></i></button>
                         </section>
                     </form>
-
-                    <br>
                     <% } %>
             </section>
         </main>

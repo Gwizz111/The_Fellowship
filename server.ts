@@ -11,6 +11,8 @@ declare module 'express-session' {
   }
 }
 
+let response =  fetch("https://the-one-api.dev/v2/quote");
+
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
 const main = async() => {
@@ -146,8 +148,13 @@ app.post("/favouriteQuote", async (req, res) =>{
 })
 app.post("/favouriteDelete", async (req, res) =>{
   const id = req.body.quoteId;
-  console.log(id);
   favorite(req.session.userId as ObjectId, id, true);
+  res.redirect("/favourites");
+})
+app.post("/blacklistDelete", async (req, res) =>{
+  const id = req.body.quoteId;
+  blacklist(req.session.userId as ObjectId, id, true);
+  res.redirect("/blacklist");
 })
 app.post("/blacklistQuote", async (req, res) =>{
   blacklist(req.session.userId as ObjectId, req.session.quoteId as string, false);
@@ -595,7 +602,7 @@ app.get("/favourites", async (req, res) => {
   for (let i = 0; i < quotesDialog.length; i++) {
     let dialogAndCharacter:Favorites = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
     quoteDialogAndCharacter.push(dialogAndCharacter)
-  }
+    }
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
 });
