@@ -11,7 +11,6 @@ declare module 'express-session' {
   }
 }
 
-let response =  fetch("https://the-one-api.dev/v2/quote");
 
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
@@ -136,6 +135,25 @@ app.post("/registreer", async (req: any, res: any) => {
 
 
 app.get("/homepage", async (req, res) => {
+  try {
+    let responseMovies = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+    let dataMovies = await responseMovies.json();
+    MovieData = dataMovies;
+    MovieDocs = MovieData.docs;
+    await client.db("fellowship").collection("movies").insertMany(MovieDocs);
+    let responseQuotes = await fetch("https://the-one-api.dev/v2/quote", { headers, });
+    let dataQuotes = await responseQuotes.json();
+    quotesData = dataQuotes;
+    quotesDocs = quotesData.docs;
+    await client.db("fellowship").collection("movies").insertMany(quotesDocs);
+    let responseCharacters = await fetch("https://the-one-api.dev/v2/character", { headers, });
+    let dataCharacters = await responseCharacters.json();
+    characterData = dataCharacters;
+    characterDocs = characterData.docs;
+    await client.db("fellowship").collection("movies").insertMany(characterDocs);
+  } catch (error) {
+  }
+
   let userHighscores = await client.db("fellowship").collection("users").findOne({_id: new ObjectId(req.session.userId)})
   let highscoreRounds = userHighscores?.highscoreRounds;
   let highscoreSuddenDeath = userHighscores?.highscoreSuddenDeath;
