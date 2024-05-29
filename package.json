@@ -11,9 +11,6 @@
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.0",
     "nodemon": "^3.1.2"
-},
-"scripts": {
-  "start": "npx nodemon server.ts"
 }
 }
 
