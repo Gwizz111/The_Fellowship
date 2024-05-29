@@ -21,14 +21,18 @@
                 <a></a>
             </section>
             <section id="BlacklistListActive">
-                <% for(let i=0 ; i < quotesDialog.length ;i++) { %>
-                    <a href="https://lotr.fandom.com/wiki/<%=charactersName[i] %>">
-                        <%=charactersName[i]%>
+                <% for(let i=0 ; i < quoteDialogAndCharacter.length ;i++) { %>
+                    <a>
+                        <%=quoteDialogAndCharacter[i].quoteDialog%>
                     </a>
                     <a>
-                        <%=quotesDialog[i]%>
-                            <i class="fa fa-trash-o" id="BlacklistListVerwijder"></i>
+                        <%=quoteDialogAndCharacter[i].characterName%>
                     </a>
+                    <form id="blacklistDelete" action="/blacklistDelete" method="post">
+                        <section id="submit">
+                            <button id="formBtn"><i class="fa fa-trash-o" id="BlacklistListVerwijder"></i></button>
+                        </section>
+                    </form>
 
                     <br>
                     <% } %>
