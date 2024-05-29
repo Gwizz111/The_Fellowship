@@ -1091,11 +1091,11 @@ select {
     h2 {
         max-width: 40%;
         text-align: center;
-        margin-left: 55px;
+        margin: auto;
     }
 
     #answers {
-        padding: 5rem;
+        padding: 1rem 5rem;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
@@ -1142,5 +1142,15 @@ select {
     #Lists p {
         margin-left: 12%;
         margin-top: 1rem;
+        margin-bottom: 5rem;
+    }
+    #score{
+        margin-bottom: 5rem;
+    }
+    #favouriteGame{
+        margin-left: 40%;
+    }
+    #blacklistGame{
+        margin: auto;
     }
 }
