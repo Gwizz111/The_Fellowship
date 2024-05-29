@@ -23,10 +23,10 @@
             <section id="BlacklistListActive">
                 <% for(let i=0 ; i < quoteDialogAndCharacter.length ;i++) { %>
                     <a>
-                        <%=quoteDialogAndCharacter[i].quoteDialog%>
+                        <%=quoteDialogAndCharacter[i].characterName%>
                     </a>
                     <a>
-                        <%=quoteDialogAndCharacter[i].characterName%>
+                        <%=quoteDialogAndCharacter[i].quoteDialog%>
                     </a>
                     <form id="blacklistDelete" action="/blacklistDelete" method="post">
                         <section id="submit">
