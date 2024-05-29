@@ -145,7 +145,9 @@ app.post("/favouriteQuote", async (req, res) =>{
   favorite(req.session.userId as ObjectId, req.session.quoteId as string, false);
 })
 app.post("/favouriteDelete", async (req, res) =>{
-  favorite(req.session.userId as ObjectId, "req.session.quoteId as string", true);
+  const id = req.body.quoteId;
+  console.log(id);
+  favorite(req.session.userId as ObjectId, id, true);
 })
 app.post("/blacklistQuote", async (req, res) =>{
   blacklist(req.session.userId as ObjectId, req.session.quoteId as string, false);
