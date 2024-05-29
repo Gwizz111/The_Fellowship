@@ -11,7 +11,6 @@ declare module 'express-session' {
   }
 }
 
-let response =  fetch("https://the-one-api.dev/v2/quote");
 
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
@@ -136,6 +135,25 @@ app.post("/registreer", async (req: any, res: any) => {
 
 
 app.get("/homepage", async (req, res) => {
+  try {
+    let responseMovies = await fetch("https://the-one-api.dev/v2/Movie", { headers, });
+    let dataMovies = await responseMovies.json();
+    MovieData = dataMovies;
+    MovieDocs = MovieData.docs;
+    await client.db("fellowship").collection("movies").insertMany(MovieDocs);
+    let responseQuotes = await fetch("https://the-one-api.dev/v2/quote", { headers, });
+    let dataQuotes = await responseQuotes.json();
+    quotesData = dataQuotes;
+    quotesDocs = quotesData.docs;
+    await client.db("fellowship").collection("movies").insertMany(quotesDocs);
+    let responseCharacters = await fetch("https://the-one-api.dev/v2/character", { headers, });
+    let dataCharacters = await responseCharacters.json();
+    characterData = dataCharacters;
+    characterDocs = characterData.docs;
+    await client.db("fellowship").collection("movies").insertMany(characterDocs);
+  } catch (error) {
+  }
+
   let userHighscores = await client.db("fellowship").collection("users").findOne({_id: new ObjectId(req.session.userId)})
   let highscoreRounds = userHighscores?.highscoreRounds;
   let highscoreSuddenDeath = userHighscores?.highscoreSuddenDeath;
@@ -150,6 +168,144 @@ app.post("/favouriteDelete", async (req, res) =>{
   const id = req.body.quoteId;
   favorite(req.session.userId as ObjectId, id, true);
   res.redirect("/favourites");
+})
+app.post("/blacklistChar", async (req, res) =>{
+  let user = await client
+  .db("fellowship")
+  .collection("users")
+  .findOne({_id: new ObjectId(req.session.userId)});
+
+  interface Blacklists {
+    quoteId: string;
+    quoteDialog: string;
+    characterName: string;
+  }
+
+  let quoteDialogAndCharacter2: Blacklists[] = [];
+
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: user?._id})
+  .toArray();
+  let quotesArray = blacklists[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  let quotesId: string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Blacklists = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter2.push(dialogAndCharacter)
+  }
+
+  const characterName = req.body.characterName;
+  let quoteDialogAndCharacter: Blacklists[] = []; 
+  for (let index = 0; index < quoteDialogAndCharacter2.length; index++) {
+    if (quoteDialogAndCharacter2[index].characterName==characterName) {
+      quoteDialogAndCharacter.push(quoteDialogAndCharacter2[index]);
+    }
+  }
+
+  console.log(quoteDialogAndCharacter)
+  res.type("text/html");
+  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs", {quoteDialogAndCharacter});
+});
+
+app.post("/favouriteChar", async (req, res) =>{
+  interface Favorites {
+    quoteId: string;
+    quoteDialog: string;
+    characterName: string;
+  }
+
+  let quoteDialogAndCharacter2: Favorites[] = [];
+
+  let favorites : any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let quotesArray = favorites[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  let quotesId: string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Favorites = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter2.push(dialogAndCharacter)
+    }
+
+  const characterName = req.body.characterName;
+  let quoteDialogAndCharacter: Favorites[] = [];
+    for (let index = 0; index < quoteDialogAndCharacter2.length; index++) {
+      if (quoteDialogAndCharacter2[index].characterName==characterName) {
+        quoteDialogAndCharacter.push(quoteDialogAndCharacter2[index]);
+      }
+    }
+    res.type("text/html");
+    res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
 })
 app.post("/blacklistDelete", async (req, res) =>{
   const id = req.body.quoteId;
@@ -303,6 +459,8 @@ interface Character {
 }
 
 //The One API
+
+
 let score: number = 0;
 let counter10: number = 0;
 
@@ -355,6 +513,19 @@ app.get("/rounds",async (req, res) => {
     .db("fellowship")
     .collection("quotes")
     .find<Quote>({}).toArray();
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let blacklistsIds = blacklists[0].quoteId;
+  for (let i = 0; i < quotes.length; i++) {
+    for (let j = 0; j < blacklistsIds.length; j++) {
+      if (quotes[i]._id == blacklistsIds[j]) {
+        quotes.splice(i,1)
+      } 
+    }
+  }
   quotesDocs = quotes;
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
@@ -422,7 +593,6 @@ app.get("/rounds",async (req, res) => {
     movie: [cMovie],
     answers: [ccharacter],
   };
-  console.log(chosenQuote);
   chosenQuote.answers.push(character)
   chosenQuote.answers.push(character2)
   chosenQuote.movie.push(Movie)
@@ -441,6 +611,19 @@ app.get("/suddendeath", async(req, res) => {
     .db("fellowship")
     .collection("quotes")
     .find<Quote>({}).toArray();
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let blacklistsIds = blacklists[0].quoteId;
+  for (let i = 0; i < quotes.length; i++) {
+    for (let j = 0; j < blacklistsIds.length; j++) {
+      if (quotes[i]._id == blacklistsIds[j]) {
+        quotes.splice(i,1)
+      } 
+    }
+  }
   quotesDocs = quotes;
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
@@ -523,7 +706,6 @@ app.get("/suddendeath", async(req, res) => {
 
 
 app.get("/favourites", async (req, res) => {
- 
   interface Favorites {
     quoteId: string;
     quoteDialog: string;
