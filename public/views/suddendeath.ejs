@@ -85,6 +85,13 @@
                 activeButton2 = null; // Als de knop al actief is, deactiveer deze
                 activeButton2Text =null;
             }
+
+        }
+        function popupfav(buttonId){
+            window.alert("tegevoegd aan favorieten.")
+        }
+        function popupblack(buttonId){
+            window.alert("tegevoegd aan je blacklist.")
         }
         
     </script>
@@ -95,12 +102,12 @@
         <h1 id="qoute"><%= chosenQuote.text %></h1>
         <form id="favouriteGame" action="/favouriteQuote" method="post">
             <section id="submit">
-                <i class="fa fa-heart-o" id="heart"></i>
+                <button id="formBtn" onclick="popupfav(this.id)"><i class="fa fa-heart-o" id="heart"></i></button>
             </section>
         </form>
         <form id="blacklistGame" action="/blacklistQuote" method="post">
             <section id="submit">
-                <i class="fa fa-close" id="x"></i>
+                <button id="formBtn" onclick="popupblack(this.id)"><i class="fa fa-close" id="x"></i></button>
             </section>
         </form>
         <h2 id="char">character</h2>
