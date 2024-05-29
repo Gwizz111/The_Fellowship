@@ -296,6 +296,8 @@ interface Character {
 }
 
 //The One API
+
+
 let score: number = 0;
 let counter10: number = 0;
 
@@ -348,6 +350,19 @@ app.get("/rounds",async (req, res) => {
     .db("fellowship")
     .collection("quotes")
     .find<Quote>({}).toArray();
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let blacklistsIds = blacklists[0].quoteId;
+  for (let i = 0; i < quotes.length; i++) {
+    for (let j = 0; j < blacklistsIds.length; j++) {
+      if (quotes[i]._id == blacklistsIds[j]) {
+        quotes.splice(i,1)
+      } 
+    }
+  }
   quotesDocs = quotes;
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
@@ -415,7 +430,6 @@ app.get("/rounds",async (req, res) => {
     movie: [cMovie],
     answers: [ccharacter],
   };
-  console.log(chosenQuote);
   chosenQuote.answers.push(character)
   chosenQuote.answers.push(character2)
   chosenQuote.movie.push(Movie)
@@ -434,6 +448,19 @@ app.get("/suddendeath", async(req, res) => {
     .db("fellowship")
     .collection("quotes")
     .find<Quote>({}).toArray();
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let blacklistsIds = blacklists[0].quoteId;
+  for (let i = 0; i < quotes.length; i++) {
+    for (let j = 0; j < blacklistsIds.length; j++) {
+      if (quotes[i]._id == blacklistsIds[j]) {
+        quotes.splice(i,1)
+      } 
+    }
+  }
   quotesDocs = quotes;
   quotePick = Math.floor(Math.random() * quotesDocs.length);
 
