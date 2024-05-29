@@ -22,9 +22,17 @@
             </section>
             <section id="FavoriteListActive">
                 <% for(let i=0 ; i < quoteDialogAndCharacter.length ;i++) { %>
-                    <a>
-                        <%=quoteDialogAndCharacter[i].characterName%>
-                    </a>
+                    <form id="favouriteChar" action="/favouriteChar" method="post">
+                        <section id="submit">
+                            <input
+                                type="hidden"
+                                name="characterName"
+                                id="characterName"
+                                value="<%=quoteDialogAndCharacter[i].characterName%>"
+                            />
+                            <button id="formBtn"><%=quoteDialogAndCharacter[i].characterName%></button>
+                        </section>
+                    </form>
                     <a>
                         <%=quoteDialogAndCharacter[i].quoteDialog%>
                     </a>
@@ -37,6 +45,7 @@
                                 value="<%=quoteDialogAndCharacter[i].quoteId%>"
                             />
                             <button id="formBtn"><i class="fa fa-trash-o" id="FavoriteListVerwijder"></i></button>
+                            <a href="https://lotr.fandom.com/wiki/<%=quoteDialogAndCharacter[i].characterName%>" target="_blank"><i class="fa fa-address-book-o "></i></a>
                         </section>
                     </form>
                     <% } %>
