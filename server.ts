@@ -516,6 +516,7 @@ app.get("/suddendeath", async(req, res) => {
 app.get("/favourites", async (req, res) => {
  
   interface Favorites {
+    quoteId: string;
     quoteDialog: string;
     characterName: string;
   }
@@ -531,6 +532,7 @@ app.get("/favourites", async (req, res) => {
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
   let charactersName : string[] = [];
+  let quotesId: string[] = [];
 
 
   let quotes : Quote[] = await client
@@ -538,12 +540,12 @@ app.get("/favourites", async (req, res) => {
   .collection("quotes")
   .find<Quote>({})
   .toArray();
-
   for (let i = 0; i < quotesArray.length; i++) {
     for (let j = 0; j < quotes.length; j++) {
       if (quotesArray[i] == quotes[j]._id) {
         quotesDialog.push(quotes[j].dialog)
         characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
       }
     }
   }
@@ -562,7 +564,7 @@ app.get("/favourites", async (req, res) => {
       }
     }
   for (let i = 0; i < quotesDialog.length; i++) {
-    let dialogAndCharacter:Favorites = {quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    let dialogAndCharacter:Favorites = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
     quoteDialogAndCharacter.push(dialogAndCharacter)
   }
   res.type("text/html");
@@ -576,6 +578,7 @@ app.get("/blacklist", async (req, res) => {
   .findOne({_id: new ObjectId(req.session.userId)});
 
   interface Blacklists {
+    quoteId: string;
     quoteDialog: string;
     characterName: string;
   }
@@ -591,6 +594,7 @@ app.get("/blacklist", async (req, res) => {
   let quotesDialog: string[] = [];
   let characterIds : string[] = [];
   let charactersName : string[] = [];
+  let quotesId: string[] = [];
 
 
   let quotes : Quote[] = await client
@@ -604,6 +608,7 @@ app.get("/blacklist", async (req, res) => {
       if (quotesArray[i] == quotes[j]._id) {
         quotesDialog.push(quotes[j].dialog)
         characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
       }
     }
   }
@@ -622,7 +627,7 @@ app.get("/blacklist", async (req, res) => {
       }
     }
   for (let i = 0; i < quotesDialog.length; i++) {
-    let dialogAndCharacter:Blacklists = {quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    let dialogAndCharacter:Blacklists = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
     quoteDialogAndCharacter.push(dialogAndCharacter)
   }
   console.log(quoteDialogAndCharacter)
