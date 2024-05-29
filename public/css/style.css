@@ -620,7 +620,13 @@ h3 {
     column-gap: 0px;
 }
 
-#favorieten a {
+#FavoriteList a {
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+#FavoriteListActive a {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
@@ -767,6 +773,21 @@ h3 {
 }
 
 /* Blacklist */
+#printActive {
+    font-family: Ringbearer;
+    color: var(--primary-color);
+    font-size: 1rem;
+
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+    align-items: top;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0px;
+
+    margin-bottom: 5rem;
+}
+
 #containerPrint {
     text-align: right;
     margin-right: 2rem;
@@ -847,7 +868,29 @@ h3 {
     transition: 0.5s;
     color: rgb(227, 140, 17);
 }
+/* PRINT */
+#printList {
+    font-family: Ringbearer;
+    color: var(--primary-color);
+    font-size: 1.5rem;
 
+    margin-right: 10%;
+    margin-left: 10%;
+    display: grid;
+    align-items: top;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0px;
+}
+#print a{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+#print h1{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
 
 /* INDEX */
 
