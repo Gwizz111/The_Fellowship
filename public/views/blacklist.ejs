@@ -27,8 +27,12 @@
                     </a>
                     <a>
                         <%=quotesDialog[i]%>
-                            <i class="fa fa-trash-o" id="BlacklistListVerwijder"></i>
                     </a>
+                    <form id="blacklistDelete" action="/blacklistDelete" method="post">
+                        <section id="submit">
+                            <button id="formBtn"><i class="fa fa-trash-o" id="BlacklistListVerwijder"></i></button>
+                        </section>
+                    </form>
 
                     <br>
                     <% } %>
