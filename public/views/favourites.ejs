@@ -29,6 +29,11 @@
                         <%=quoteDialogAndCharacter[i].characterName%>
                             <i class="fa fa-trash-o" id="FavoriteListVerwijder"></i>
                     </a>
+                    <form id="favouriteDelete" action="/favouriteDelete" method="post">
+                        <section id="submit">
+                            <button id="formBtn"><i class="fa fa-trash-o" id="FavoriteListVerwijder"></i></button>
+                        </section>
+                    </form>
 
                     <br>
                     <% } %>
