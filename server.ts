@@ -513,10 +513,11 @@ app.get("/suddendeath", async(req, res) => {
 app.get("/favourites", async (req, res) => {
  
   interface Favorites {
-    _id: ObjectId,
-    userId: ObjectId,
-    quoteId: string[]
+    quoteDialog: string;
+    characterName: string;
   }
+
+  let quoteDialogAndCharacter: any[] = [];
 
   let favorites : any = await client
   .db("fellowship")
@@ -557,8 +558,13 @@ app.get("/favourites", async (req, res) => {
         }
       }
     }
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Favorites = {quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter.push(dialogAndCharacter)
+  }
+  console.log(quoteDialogAndCharacter);
   res.type("text/html");
-  res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quotesDialog, charactersName});
+  res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
 });
 
 app.get("/blacklist", async (req, res) => {
