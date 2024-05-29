@@ -11,6 +11,8 @@ declare module 'express-session' {
   }
 }
 
+let response = await fetch("https://the-one-api.dev/v2/quote");
+let quotes = await response.json();
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
 const main = async() => {
@@ -568,7 +570,7 @@ app.get("/favourites", async (req, res) => {
   for (let i = 0; i < quotesDialog.length; i++) {
     let dialogAndCharacter:Favorites = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
     quoteDialogAndCharacter.push(dialogAndCharacter)
-  }
+    }
   res.type("text/html");
   res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
 });
