@@ -272,8 +272,9 @@ h3 {
     font-size: 1.2rem;
     letter-spacing: 1px;
 }
-#char{
-    padding-top: 1rem ;
+
+#char {
+    padding-top: 1rem;
     padding-bottom: 0rem;
 
 }
@@ -423,8 +424,8 @@ h3 {
 }
 
 /* 10 rondes */
-#favouriteGame{
-    
+#favouriteGame {
+
     margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: 47%;
@@ -433,8 +434,9 @@ h3 {
     font-size: 2.2rem;
     color: var(--primary-color);
 }
-#blacklistGame{
-    
+
+#blacklistGame {
+
     margin-top: 1rem;
     margin-bottom: 1rem;
     display: inline-block;
@@ -443,16 +445,18 @@ h3 {
     color: var(--primary-color);
 }
 
-#favouriteGame i:hover{
+#favouriteGame i:hover {
     cursor: pointer;
-    color:rgb(255, 166, 0)enrod;
+    color: rgb(255, 166, 0)enrod;
     transition: 0.5s;
 }
-#blacklistGame i:hover{
+
+#blacklistGame i:hover {
     cursor: pointer;
-    color:rgb(255, 166, 0)enrod;
+    color: rgb(255, 166, 0)enrod;
     transition: 0.5s;
 }
+
 #answers {
     align-items: center;
     margin: 1rem;
@@ -465,15 +469,17 @@ h3 {
 #answers a {
     text-decoration: none;
 }
-#formBtn{
+
+#formBtn {
     background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
+
 .btn {
     display: block;
     margin: 1.2rem auto;
@@ -494,7 +500,8 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
-.btnactive{
+
+.btnactive {
     display: block;
     margin: auto;
     text-align: center;
@@ -514,8 +521,9 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
-#submitBtn:hover{
-    
+
+#submitBtn:hover {
+
     display: block;
     margin: auto;
     text-align: center;
@@ -535,7 +543,8 @@ h3 {
     cursor: pointer;
     letter-spacing: 0.5px;
 }
-.btn:hover{
+
+.btn:hover {
     display: block;
     text-align: center;
     font-family: Ringbearer;
@@ -627,34 +636,39 @@ h3 {
     border-bottom: solid var(--primary-color) 1.5px;
 }
 
-#favouriteDelete{
+#favouriteDelete {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid var(--primary-color) 1.5px;
 }
-#favouriteDelete a{
+
+#favouriteDelete a {
     border-bottom: none;
 }
-#favouriteChar{
+
+#favouriteChar {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid var(--primary-color) 1.5px;
 }
-#blacklistChar{
+
+#blacklistChar {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid var(--primary-color) 1.5px;
 }
-#blacklistDelete{
+
+#blacklistDelete {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid var(--primary-color) 1.5px;
 }
-#blacklistDelete a{
+
+#blacklistDelete a {
     border-bottom: none;
 }
 
@@ -697,6 +711,7 @@ h3 {
     cursor: pointer;
     border-bottom: none;
 }
+
 #FavoriteListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
@@ -770,6 +785,7 @@ h3 {
 #containerPrint {
     text-align: right;
     margin-right: 2rem;
+    background: none;
 }
 
 #containerPrint i {
@@ -821,7 +837,8 @@ h3 {
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
 }
-#blacklistA{
+
+#blacklistA {
     border-bottom: solid var(--primary-color) 1.5px;
 }
 
@@ -1175,16 +1192,20 @@ select {
         margin-top: 1rem;
         margin-bottom: 5rem;
     }
-    #score{
+
+    #score {
         margin-bottom: 5rem;
     }
-    #favouriteGame{
+
+    #favouriteGame {
         margin-left: 40%;
     }
-    #blacklistGame{
+
+    #blacklistGame {
         margin: auto;
     }
-    .btn{
+
+    .btn {
         margin: auto;
         margin-bottom: 1rem;
     }

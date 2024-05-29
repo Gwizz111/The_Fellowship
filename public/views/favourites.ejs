@@ -8,13 +8,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script>
+        document.getElementById('containerPrint').addEventListener('click', function () {
+            document.getElementById('downloadForm').submit();
+        });
+    </script>
 </head>
 
 <body>
     <%- include("partials/header") %>
         <main id="favorieten">
             <h1>Favorieten</h1>
-            <div id="containerPrint"><i class="fa fa-print"></i></div>
+            <form id="containerPrint" action=" /downloadFavorites" method="post">
+                <button id="containerPrint"><i class="fa fa-print"></i></button>
+            </form>
+
             <section id="FavoriteList">
                 <a>karakter</a>
                 <a>Quote</a>
@@ -24,13 +32,11 @@
                 <% for(let i=0 ; i < quoteDialogAndCharacter.length ;i++) { %>
                     <form id="favouriteChar" action="/favouriteChar" method="post">
                         <section id="submit">
-                            <input
-                                type="hidden"
-                                name="characterName"
-                                id="characterName"
-                                value="<%=quoteDialogAndCharacter[i].characterName%>"
-                            />
-                            <button id="formBtn"><%=quoteDialogAndCharacter[i].characterName%></button>
+                            <input type="hidden" name="characterName" id="characterName"
+                                value="<%=quoteDialogAndCharacter[i].characterName%>" />
+                            <button id="formBtn">
+                                <%=quoteDialogAndCharacter[i].characterName%>
+                            </button>
                         </section>
                     </form>
                     <a>
@@ -38,14 +44,11 @@
                     </a>
                     <form id="favouriteDelete" action="/favouriteDelete" method="post">
                         <section id="submit">
-                            <input
-                                type="hidden"
-                                name="quoteId"
-                                id="quoteId"
-                                value="<%=quoteDialogAndCharacter[i].quoteId%>"
-                            />
+                            <input type="hidden" name="quoteId" id="quoteId"
+                                value="<%=quoteDialogAndCharacter[i].quoteId%>" />
                             <button id="formBtn"><i class="fa fa-trash-o" id="FavoriteListVerwijder"></i></button>
-                            <a href="https://lotr.fandom.com/wiki/<%=quoteDialogAndCharacter[i].characterName%>" target="_blank"><i class="fa fa-address-book-o "></i></a>
+                            <a href="https://lotr.fandom.com/wiki/<%=quoteDialogAndCharacter[i].characterName%>"
+                                target="_blank"><i class="fa fa-address-book-o "></i></a>
                         </section>
                     </form>
                     <% } %>
