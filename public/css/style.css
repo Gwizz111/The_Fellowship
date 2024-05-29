@@ -424,9 +424,9 @@ h3 {
 
 /* 10 rondes */
 #favouriteGame{
-    margin: auto;
-    margin-top: -2rem;
-    margin-bottom: -2rem;
+    
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     margin-left: 47%;
     display: inline-block;
     text-align: center;
@@ -434,9 +434,9 @@ h3 {
     color: var(--primary-color);
 }
 #blacklistGame{
-    margin: auto;
-    margin-top: -2rem;
-    margin-bottom: -2rem;
+    
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     display: inline-block;
     text-align: center;
     font-size: 2.4rem;
@@ -476,7 +476,7 @@ h3 {
 }
 .btn {
     display: block;
-    margin: auto;
+    margin: 1.2rem auto;
     text-align: center;
     font-family: Ringbearer;
     font-weight: 0;
@@ -1151,5 +1151,9 @@ select {
     }
     #blacklistGame{
         margin: auto;
+    }
+    .btn{
+        margin: auto;
+        margin-bottom: 1rem;
     }
 }

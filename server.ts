@@ -11,8 +11,8 @@ declare module 'express-session' {
   }
 }
 
-let response = await fetch("https://the-one-api.dev/v2/quote");
-let quotes = await response.json();
+let response =  fetch("https://the-one-api.dev/v2/quote");
+
 const dbUri = "mongodb+srv://fellowship:fWsnI39ZT4gLLqWz@cluster0.t5jctlk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(dbUri);
 const main = async() => {
