@@ -628,6 +628,19 @@ h3 {
     border-bottom: solid var(--primary-color) 1.5px;
 }
 
+#favouriteDelete{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+#blacklistDelete{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+
 #FavoriteListActive {
     font-family: Ringbearer;
     color: var(--primary-color);
@@ -648,7 +661,6 @@ h3 {
     transition: 1s;
     cursor: pointer;
     font-size: 1.8rem;
-    border-bottom: solid var(--primary-color) 1.5px;
 }
 
 #FavoriteListActive i:hover {
@@ -664,8 +676,8 @@ h3 {
 #FavoriteListVerwijder {
     transition: 0.5s;
     cursor: pointer;
+    border-bottom: none;
 }
-
 #FavoriteListVerwijder:hover {
     transition: 0.5s;
     color: rgb(227, 140, 17);
@@ -760,7 +772,6 @@ h3 {
     transition: 1s;
     cursor: pointer;
     font-size: 1.8rem;
-    border-bottom: solid var(--primary-color) 1.5px;
 }
 
 #BlacklistListActive i:hover {

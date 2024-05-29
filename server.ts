@@ -149,6 +149,11 @@ app.post("/favouriteDelete", async (req, res) =>{
   console.log(id);
   favorite(req.session.userId as ObjectId, id, true);
 })
+app.post("/blacklistDelete", async (req, res) =>{
+  const id = req.body.quoteId;
+  console.log(id);
+  blacklist(req.session.userId as ObjectId, id, true);
+})
 app.post("/blacklistQuote", async (req, res) =>{
   blacklist(req.session.userId as ObjectId, req.session.quoteId as string, false);
 })
