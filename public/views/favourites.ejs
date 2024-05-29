@@ -23,19 +23,15 @@
             <section id="FavoriteListActive">
                 <% for(let i=0 ; i < quoteDialogAndCharacter.length ;i++) { %>
                     <a>
-                        <%=quoteDialogAndCharacter[i].quoteDialog%>
+                        <%=quoteDialogAndCharacter[i].characterName%>
                     </a>
                     <a>
-                        <%=quoteDialogAndCharacter[i].characterName%>
+                        <%=quoteDialogAndCharacter[i].quoteDialog%>
                             <i class="fa fa-trash-o" id="FavoriteListVerwijder"></i>
                     </a>
                     <form id="favouriteDelete" action="/favouriteDelete" method="post">
-                        <input
-                            type="hidden"
-                            name="quoteId"
-                            id="quoteId"
-                            value="<%=quotesDialog[i]%>"
-                        />
+                        <input type="hidden" name="quoteId" id="quoteId"
+                            value="<%=quoteDialogAndCharacter[i].quoteDialog%>" />
                         <section id="submit">
                             <button id="formBtn"><i class="fa fa-trash-o" id="FavoriteListVerwijder"></i></button>
                         </section>
