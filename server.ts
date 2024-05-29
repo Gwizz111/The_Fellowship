@@ -238,7 +238,6 @@ app.post("/blacklistChar", async (req, res) =>{
     }
   }
 
-  console.log(quoteDialogAndCharacter)
   res.type("text/html");
   res.render("../public/views/blacklist.ejs", {quoteDialogAndCharacter});
 });
@@ -383,7 +382,6 @@ const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => 
       { userId: new ObjectId(userId) },
       { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
     );
-    console.log("added")
   }
   else if (remove == true) {
     let deleteQuote = await client
@@ -821,7 +819,6 @@ app.get("/blacklist", async (req, res) => {
     let dialogAndCharacter:Blacklists = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
     quoteDialogAndCharacter.push(dialogAndCharacter)
   }
-  console.log(quoteDialogAndCharacter)
   res.type("text/html");
   res.render("../public/views/blacklist.ejs", {quoteDialogAndCharacter});
 });
