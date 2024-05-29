@@ -537,7 +537,6 @@ h3 {
 }
 .btn:hover{
     display: block;
-    margin: auto;
     text-align: center;
     font-family: Ringbearer;
     font-weight: 0;
@@ -634,11 +633,29 @@ h3 {
     padding-top: 0.5rem;
     border-bottom: solid var(--primary-color) 1.5px;
 }
+#favouriteDelete a{
+    border-bottom: none;
+}
+#favouriteChar{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
+#blacklistChar{
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    border-bottom: solid var(--primary-color) 1.5px;
+}
 #blacklistDelete{
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
     border-bottom: solid var(--primary-color) 1.5px;
+}
+#blacklistDelete a{
+    border-bottom: none;
 }
 
 #FavoriteListActive {
@@ -652,6 +669,8 @@ h3 {
     align-items: top;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 0px;
+
+    margin-bottom: 5rem;
 }
 
 #FavoriteListActive i {
@@ -801,6 +820,8 @@ h3 {
     text-align: center;
     padding-bottom: 0.5rem;
     padding-top: 0.5rem;
+}
+#blacklistA{
     border-bottom: solid var(--primary-color) 1.5px;
 }
 
