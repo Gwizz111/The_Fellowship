@@ -151,6 +151,144 @@ app.post("/favouriteDelete", async (req, res) =>{
   favorite(req.session.userId as ObjectId, id, true);
   res.redirect("/favourites");
 })
+app.post("/blacklistChar", async (req, res) =>{
+  let user = await client
+  .db("fellowship")
+  .collection("users")
+  .findOne({_id: new ObjectId(req.session.userId)});
+
+  interface Blacklists {
+    quoteId: string;
+    quoteDialog: string;
+    characterName: string;
+  }
+
+  let quoteDialogAndCharacter2: Blacklists[] = [];
+
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: user?._id})
+  .toArray();
+  let quotesArray = blacklists[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  let quotesId: string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Blacklists = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter2.push(dialogAndCharacter)
+  }
+
+  const characterName = req.body.characterName;
+  let quoteDialogAndCharacter: Blacklists[] = []; 
+  for (let index = 0; index < quoteDialogAndCharacter2.length; index++) {
+    if (quoteDialogAndCharacter2[index].characterName==characterName) {
+      quoteDialogAndCharacter.push(quoteDialogAndCharacter2[index]);
+    }
+  }
+
+  console.log(quoteDialogAndCharacter)
+  res.type("text/html");
+  res.render("/workspaces/The_Fellowship/public/views/blacklist.ejs", {quoteDialogAndCharacter});
+});
+
+app.post("/favouriteChar", async (req, res) =>{
+  interface Favorites {
+    quoteId: string;
+    quoteDialog: string;
+    characterName: string;
+  }
+
+  let quoteDialogAndCharacter2: Favorites[] = [];
+
+  let favorites : any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let quotesArray = favorites[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  let quotesId: string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Favorites = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter2.push(dialogAndCharacter)
+    }
+
+  const characterName = req.body.characterName;
+  let quoteDialogAndCharacter: Favorites[] = [];
+    for (let index = 0; index < quoteDialogAndCharacter2.length; index++) {
+      if (quoteDialogAndCharacter2[index].characterName==characterName) {
+        quoteDialogAndCharacter.push(quoteDialogAndCharacter2[index]);
+      }
+    }
+    res.type("text/html");
+    res.render("/workspaces/The_Fellowship/public/views/favourites.ejs", {quoteDialogAndCharacter});
+})
 app.post("/blacklistDelete", async (req, res) =>{
   const id = req.body.quoteId;
   blacklist(req.session.userId as ObjectId, id, true);
@@ -550,7 +688,6 @@ app.get("/suddendeath", async(req, res) => {
 
 
 app.get("/favourites", async (req, res) => {
- 
   interface Favorites {
     quoteId: string;
     quoteDialog: string;
