@@ -53,6 +53,7 @@ app.get("/", (req, res) => {
   res.render("../public/views/index.ejs");
 });
 
+
 app.get("/login", (req: any, res: any) => {
   let failed: boolean = false;
   if (req.query.failed == "true") {
@@ -163,6 +164,7 @@ app.get("/homepage", async (req, res) => {
 
 app.post("/favouriteQuote", async (req, res) =>{
   favorite(req.session.userId as ObjectId, req.session.quoteId as string, false);
+  
 })
 app.post("/favouriteDelete", async (req, res) =>{
   const id = req.body.quoteId;
@@ -238,7 +240,6 @@ app.post("/blacklistChar", async (req, res) =>{
     }
   }
 
-  console.log(quoteDialogAndCharacter)
   res.type("text/html");
   res.render("../public/views/blacklist.ejs", {quoteDialogAndCharacter});
 });
@@ -383,7 +384,6 @@ const blacklist = async (userId: ObjectId, quoteId: string, remove: boolean) => 
       { userId: new ObjectId(userId) },
       { $push: { quoteId: quoteId } as unknown as PushOperator<Document>}
     );
-    console.log("added")
   }
   else if (remove == true) {
     let deleteQuote = await client
@@ -760,6 +760,127 @@ app.get("/favourites", async (req, res) => {
   res.render("../public/views/favourites.ejs", {quoteDialogAndCharacter});
 });
 
+app.post("/downloadFavorites",async (req, res) => {
+  interface Favorites {
+    quoteId: string;
+    quoteDialog: string;
+    characterName: string;
+  }
+
+  let quoteDialogAndCharacter: Favorites[] = [];
+
+  let favorites : any = await client
+  .db("fellowship")
+  .collection("favorites")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let quotesArray = favorites[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  let quotesId: string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Favorites = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter.push(dialogAndCharacter)
+    }
+  const fileName = "favoriteQuotes.txt";
+  
+  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+  res.send(quoteDialogAndCharacter);
+});
+
+app.post("/downloadBlacklist",async (req, res) => {
+  interface Blacklists {
+    quoteId: string;
+    quoteDialog: string;
+    characterName: string;
+  }
+
+  let quoteDialogAndCharacter: Blacklists[] = [];
+
+  let blacklists : any = await client
+  .db("fellowship")
+  .collection("blacklists")
+  .find({userId: new ObjectId(req.session.userId)})
+  .toArray();
+  let quotesArray = blacklists[0].quoteId;
+  let quotesDialog: string[] = [];
+  let characterIds : string[] = [];
+  let charactersName : string[] = [];
+  let quotesId: string[] = [];
+
+
+  let quotes : Quote[] = await client
+  .db("fellowship")
+  .collection("quotes")
+  .find<Quote>({})
+  .toArray();
+
+  for (let i = 0; i < quotesArray.length; i++) {
+    for (let j = 0; j < quotes.length; j++) {
+      if (quotesArray[i] == quotes[j]._id) {
+        quotesDialog.push(quotes[j].dialog)
+        characterIds.push(quotes[j].character)
+        quotesId.push(quotes[j]._id)
+      }
+    }
+  }
+
+  let characters = await client
+    .db("fellowship")
+    .collection("characters")
+    .find<Character>({})
+    .toArray();
+
+    for (let i = 0; i < characterIds.length; i++) {
+      for (let j = 0; j < characters.length; j++) {
+        if (characterIds[i] == characters[j]._id) {
+          charactersName.push(characters[j].name)
+        }
+      }
+    }
+  for (let i = 0; i < quotesDialog.length; i++) {
+    let dialogAndCharacter:Blacklists = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
+    quoteDialogAndCharacter.push(dialogAndCharacter)
+  }
+  const fileName = "blacklistQuotes.txt";
+  
+  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+  res.send(quoteDialogAndCharacter);
+});
+
 app.get("/blacklist", async (req, res) => {
   let user = await client
   .db("fellowship")
@@ -819,7 +940,6 @@ app.get("/blacklist", async (req, res) => {
     let dialogAndCharacter:Blacklists = {quoteId:quotesId[i] ,quoteDialog:quotesDialog[i], characterName: charactersName[i]} 
     quoteDialogAndCharacter.push(dialogAndCharacter)
   }
-  console.log(quoteDialogAndCharacter)
   res.type("text/html");
   res.render("../public/views/blacklist.ejs", {quoteDialogAndCharacter});
 });

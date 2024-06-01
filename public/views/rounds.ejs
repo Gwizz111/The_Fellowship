@@ -10,54 +10,54 @@
     <link rel="stylesheet" href="/css/style.css">
     <script type="module" src="/public/js/button.js" defer></script>
     <script>
-        let activeButton =null;
-        let activeButton2 =null;
-        let activeButtonText =null;
-        let activeButton2Text =null;
+        let activeButton = null;
+        let activeButton2 = null;
+        let activeButtonText = null;
+        let activeButton2Text = null;
 
         function changeColor(buttonId) {
-        const buttons = document.querySelectorAll('.btn');
+            const buttons = document.querySelectorAll('.btn');
 
-        // Verwijder 'active' klasse van alle knoppen
-        for (var i = 0; i < buttons.length; i++) {
-            let id = "btn"+(i+1);
-            switch(id) {
-                case "btn1":
-                    var element = document.getElementById("btn1");
-                    break;
-                case "btn2":
-                    var element = document.getElementById("btn2");
-                    break;
-                case "btn3":
-                    var element = document.getElementById("btn3");
-                    break;
+            // Verwijder 'active' klasse van alle knoppen
+            for (var i = 0; i < buttons.length; i++) {
+                let id = "btn" + (i + 1);
+                switch (id) {
+                    case "btn1":
+                        var element = document.getElementById("btn1");
+                        break;
+                    case "btn2":
+                        var element = document.getElementById("btn2");
+                        break;
+                    case "btn3":
+                        var element = document.getElementById("btn3");
+                        break;
+                }
+
+                if (element.classList.contains('btnactive')) {
+                    document.getElementById(id).removeAttribute("class", 'btnactive');
+                    document.getElementById(id).setAttribute("class", 'btn');
+                }
             }
-            
-            if(element.classList.contains('btnactive')) {
-                document.getElementById(id).removeAttribute("class", 'btnactive');
-                document.getElementById(id).setAttribute("class", 'btn');
+
+            // Als de huidige knop niet actief is, maak deze actief
+            if (activeButton !== buttonId) {
+                document.getElementById(buttonId).classList.remove('btn');
+                document.getElementById(buttonId).classList.add('btnactive');
+                activeButton = buttonId;
+                activeButtonText = document.getElementById(buttonId).value;
+                document.getElementById("selectedCharacter").value = activeButtonText
+            } else {
+                activeButton = null; // Als de knop al actief is, deactiveer deze
+                activeButton2Text = null;
             }
         }
-
-        // Als de huidige knop niet actief is, maak deze actief
-        if (activeButton !== buttonId) {
-            document.getElementById(buttonId).classList.remove('btn');
-            document.getElementById(buttonId).classList.add('btnactive');
-            activeButton = buttonId;
-            activeButtonText = document.getElementById(buttonId).value;
-            document.getElementById("selectedCharacter").value = activeButtonText
-        } else {
-            activeButton =null; // Als de knop al actief is, deactiveer deze
-            activeButton2Text =null;
-        }
-    }
         function changeColor2(buttonId) {
             const buttons = document.querySelectorAll('.btn');
 
             // Verwijder 'active' klasse van alle knoppen
             for (var i = 0; i < buttons.length; i++) {
-                let id2 = "btnn"+(i+1);
-                switch(id2) {
+                let id2 = "btnn" + (i + 1);
+                switch (id2) {
                     case "btnn1":
                         var element2 = document.getElementById("btnn1");
                         break;
@@ -68,8 +68,8 @@
                         var element2 = document.getElementById("btnn3");
                         break;
                 }
-                
-                if(element2.classList.contains('btnactive')) {
+
+                if (element2.classList.contains('btnactive')) {
                     document.getElementById(id2).removeAttribute("class", 'btnactive');
                     document.getElementById(id2).setAttribute("class", 'btn');
                 }
@@ -84,61 +84,87 @@
                 document.getElementById("selectedMovie").value = activeButton2Text
             } else {
                 activeButton2 = null; // Als de knop al actief is, deactiveer deze
-                activeButton2Text =null;
+                activeButton2Text = null;
             }
         }
-        
+        function popupfav(buttonId) {
+            window.alert("tegevoegd aan favorieten.")
+        }
+        function popupblack(buttonId) {
+            window.prompt("Waarom blacklist je deze quote?")
+        }
     </script>
 </head>
 
 <body>
     <%- include("partials/header") %>
-    <main>
-        <h1 id="qoute"><%= chosenQuote.text %></h1>
-        <form id="favouriteGame" action="/favouriteQuote" method="post">
-            <section id="submit">
-                <button id="formBtn"><i class="fa fa-heart-o" id="heart"></i></button>
-            </section>
-        </form>
-        <form id="blacklistGame" action="/blacklistQuote" method="post">
-            <section id="submit">
-                <button id="formBtn"><i class="fa fa-close" id="x"></i></button>
-            </section>
-        </form>
-        <h2 id="char">character</h2>
-        <form action="/rounds" method="post">
-            <section id="answers">
-                <div>
-                    <button id="btn1" name="btn1" class="btn" type="button" onclick="changeColor(this.id)" value="<%= chosenQuote.answers[0] %>"><%= chosenQuote.answers[0] %></button>
-                </div>
-                <div>
-                    <button id="btn2" name="btn2" class="btn" type="button" onclick="changeColor(this.id)" value="<%= chosenQuote.answers[1] %>"><%= chosenQuote.answers[1] %></button>
-                </div>
-                <div>
-                    <button id="btn3" name="btn3" class="btn" type="button" onclick="changeColor(this.id)" value="<%= chosenQuote.answers[2] %>"><%= chosenQuote.answers[2] %></button>
-                </div>
-            </section>
-            <h2 id="char">movie</h2>
-            <section id="answers">
-                <div>
-                    <button id="btnn1" name="btnn1" class="btn" type="button" onclick="changeColor2(this.id)" value="<%= chosenQuote.movie[0] %>"><%= chosenQuote.movie[0] %></button>
-                </div>
-                <div>
-                    <button id="btnn2" name="btnn2" class="btn" type="button" onclick="changeColor2(this.id)" value="<%= chosenQuote.movie[1] %>"><%= chosenQuote.movie[1] %></button>
-                </div>
-                <div>
-                    <button id="btnn3" name="btnn3" class="btn" type="button" onclick="changeColor2(this.id)" value="<%= chosenQuote.movie[2] %>"><%= chosenQuote.movie[2] %></button>
-                </div>
-                <input type="hidden" id="selectedMovie" name="selectedMovie" value="" />
-                <input type="hidden" id="selectedCharacter" name="selectedCharacter" value="" />
-            </section>
-            <section id="submit">
+        <main>
+            <h1 id="qoute">
+                <%= chosenQuote.text %>
+            </h1>
+            <form id="favouriteGame" action="/favouriteQuote" method="post">
+                <section id="submit">
+                    <button id="formBtn" onclick="popupfav(this.id)"><i class="fa fa-heart-o" id="heart"></i></button>
+                </section>
+            </form>
+            <form id="blacklistGame" action="/blacklistQuote" method="post">
+                <section id="submit">
+                    <button id="formBtn" onclick="popupblack(this.id)"><i class="fa fa-close" id="x"></i></button>
+                </section>
+            </form>
+            <h2 id="char">character</h2>
+            <form action="/rounds" method="post">
+                <section id="answers">
+                    <div>
+                        <button id="btn1" name="btn1" class="btn" type="button" onclick="changeColor(this.id)"
+                            value="<%= chosenQuote.answers[0] %>">
+                            <%= chosenQuote.answers[0] %>
+                        </button>
+                    </div>
+                    <div>
+                        <button id="btn2" name="btn2" class="btn" type="button" onclick="changeColor(this.id)"
+                            value="<%= chosenQuote.answers[1] %>">
+                            <%= chosenQuote.answers[1] %>
+                        </button>
+                    </div>
+                    <div>
+                        <button id="btn3" name="btn3" class="btn" type="button" onclick="changeColor(this.id)"
+                            value="<%= chosenQuote.answers[2] %>">
+                            <%= chosenQuote.answers[2] %>
+                        </button>
+                    </div>
+                </section>
+                <h2 id="char">movie</h2>
+                <section id="answers">
+                    <div>
+                        <button id="btnn1" name="btnn1" class="btn" type="button" onclick="changeColor2(this.id)"
+                            value="<%= chosenQuote.movie[0] %>">
+                            <%= chosenQuote.movie[0] %>
+                        </button>
+                    </div>
+                    <div>
+                        <button id="btnn2" name="btnn2" class="btn" type="button" onclick="changeColor2(this.id)"
+                            value="<%= chosenQuote.movie[1] %>">
+                            <%= chosenQuote.movie[1] %>
+                        </button>
+                    </div>
+                    <div>
+                        <button id="btnn3" name="btnn3" class="btn" type="button" onclick="changeColor2(this.id)"
+                            value="<%= chosenQuote.movie[2] %>">
+                            <%= chosenQuote.movie[2] %>
+                        </button>
+                    </div>
+                    <input type="hidden" id="selectedMovie" name="selectedMovie" value="" />
+                    <input type="hidden" id="selectedCharacter" name="selectedCharacter" value="" />
+                </section>
+                <section id="submit">
                     <button id="submitBtn" class="btn">Volgende quote</button>
-            </section>
-        </form>
-        <h3 id="score">Score: <%= score %></h3>
-    </main>
-    <%- include("partials/footer") %>
+                </section>
+            </form>
+            <h3 id="score">Score: <%= score %>
+            </h3>
+        </main>
+        <%- include("partials/footer") %>
 </body>
 
 </html>
